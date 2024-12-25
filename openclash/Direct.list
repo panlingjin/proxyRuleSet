@@ -3,8 +3,6 @@
 # MyList
 # 域名后缀匹配
 DOMAIN-SUFFIX,time.windows.com
-DOMAIN-SUFFIX,lanzov.com
-DOMAIN-SUFFIX,hao123.com
 # PT站点
 DOMAIN-SUFFIX,ptvicomo.net
 DOMAIN-SUFFIX,hdpt.xyz
