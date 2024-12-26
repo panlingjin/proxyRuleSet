@@ -9,8 +9,11 @@ DOMAIN-SUFFIX,hdpt.xyz
 DOMAIN-SUFFIX,ptcafe.club
 DOMAIN-SUFFIX,icc2022.com
 
+# 域名匹配
+DOMAIN,pt.cdfile.org
+
 # 域名关键字匹配
-DOMAIN-KEYWORD,baidu
+# DOMAIN-KEYWORD,baidu
 
 # IP段匹配
 IP-CIDR,219.146.1.66/32,no-resolve
@@ -27,20 +30,6 @@ IP-CIDR,180.76.76.76/32,no-resolve
 IP-CIDR,114.114.114.114/32,no-resolve
 IP-CIDR,114.114.115.115/32,no-resolve
 
-
-# 360
-DOMAIN-SUFFIX,360.com
-DOMAIN-SUFFIX,360kuai.com
-DOMAIN-SUFFIX,360safe.com
-DOMAIN-SUFFIX,dhrest.com
-DOMAIN-SUFFIX,qhres.com
-DOMAIN-SUFFIX,qhstatic.com
-DOMAIN-SUFFIX,qhupdate.com
-DOMAIN-SUFFIX,so.com
-
-
-# 58
-DOMAIN-SUFFIX,58.com
 
 # Alibaba
 DOMAIN-SUFFIX,1688.com
@@ -160,38 +149,6 @@ DOMAIN-SUFFIX,zijieimg.com
 DOMAIN-SUFFIX,zjbyte.com
 DOMAIN-SUFFIX,zjcdn.com
 
-# CCTV
-DOMAIN-SUFFIX,cctv.com
-DOMAIN-SUFFIX,cctvpic.com
-DOMAIN-SUFFIX,livechina.com
-
-
-# HuaWei
-DOMAIN-SUFFIX,dbankcdn.com
-DOMAIN-SUFFIX,hc-cdn.com
-DOMAIN-SUFFIX,hicloud.com
-DOMAIN-SUFFIX,hihonor.com
-DOMAIN-SUFFIX,huawei.com
-DOMAIN-SUFFIX,huaweicloud.com
-DOMAIN-SUFFIX,huaweishop.net
-DOMAIN-SUFFIX,hwccpc.com
-DOMAIN-SUFFIX,vmall.com
-DOMAIN-SUFFIX,vmallres.com
-
-
-# Iqiyi
-DOMAIN-SUFFIX,71.am
-DOMAIN-SUFFIX,71edge.com
-DOMAIN-SUFFIX,iqiyi.com
-DOMAIN-SUFFIX,iqiyipic.com
-DOMAIN-SUFFIX,ppsimg.com
-DOMAIN-SUFFIX,qiyi.com
-DOMAIN-SUFFIX,qiyipic.com
-DOMAIN-SUFFIX,qy.net
-
-# PDD 拼多多
-DOMAIN-SUFFIX,pinduoduo.com
-DOMAIN-SUFFIX,yangkeduo.com
 
 # JD
 DOMAIN-SUFFIX,360buy.com
@@ -208,81 +165,6 @@ DOMAIN-SUFFIX,iciba.com
 DOMAIN-SUFFIX,ksosoft.com
 DOMAIN-SUFFIX,ksyun.com
 
-# Kuaishou 快手
-DOMAIN-SUFFIX,kuaishou.com
-DOMAIN-SUFFIX,yximgs.com
-
-# Meitu
-DOMAIN-SUFFIX,meitu.com
-DOMAIN-SUFFIX,meitudata.com
-DOMAIN-SUFFIX,meitustat.com
-DOMAIN-SUFFIX,meipai.com
-
-# LeTV 乐视
-DOMAIN-SUFFIX,le.com
-DOMAIN-SUFFIX,lecloud.com
-DOMAIN-SUFFIX,letv.com
-DOMAIN-SUFFIX,letvcloud.com
-DOMAIN-SUFFIX,letvimg.com
-DOMAIN-SUFFIX,letvlive.com
-DOMAIN-SUFFIX,letvstore.com
-
-# MGTV 芒果TV
-DOMAIN-SUFFIX,hitv.com
-DOMAIN-SUFFIX,hunantv.com
-DOMAIN-SUFFIX,mgtv.com
-
-# MI
-DOMAIN-SUFFIX,duokan.com
-DOMAIN-SUFFIX,mi-img.com
-DOMAIN-SUFFIX,mi.com
-DOMAIN-SUFFIX,miui.com
-DOMAIN-SUFFIX,xiaomi.com
-DOMAIN-SUFFIX,xiaomi.net
-DOMAIN-SUFFIX,xiaomicp.com
-
-# NetEase
-DOMAIN-SUFFIX,126.com
-DOMAIN-SUFFIX,126.net
-DOMAIN-SUFFIX,127.net
-DOMAIN-SUFFIX,163.com
-DOMAIN-SUFFIX,163yun.com
-DOMAIN-SUFFIX,lofter.com
-DOMAIN-SUFFIX,netease.com
-DOMAIN-SUFFIX,ydstatic.com
-DOMAIN-SUFFIX,youdao.com
-
-# PPTV、PPLive
-DOMAIN-SUFFIX,pplive.com
-DOMAIN-SUFFIX,pptv.com
-
-# Sina
-DOMAIN-SUFFIX,leju.com
-DOMAIN-SUFFIX,miaopai.com
-DOMAIN-SUFFIX,sina.com
-DOMAIN-SUFFIX,sina.com.cn
-DOMAIN-SUFFIX,sina.cn
-DOMAIN-SUFFIX,sinaapp.com
-DOMAIN-SUFFIX,sinaapp.cn
-DOMAIN-SUFFIX,sinaimg.com
-DOMAIN-SUFFIX,sinaimg.cn
-DOMAIN-SUFFIX,weibo.com
-DOMAIN-SUFFIX,weibo.cn
-DOMAIN-SUFFIX,weibocdn.com
-DOMAIN-SUFFIX,weibocdn.cn
-DOMAIN-SUFFIX,xiaoka.tv
-
-# Sohu Sogo
-DOMAIN-SUFFIX,go2map.com
-DOMAIN-SUFFIX,sogo.com
-DOMAIN-SUFFIX,sogou.com
-DOMAIN-SUFFIX,sogoucdn.com
-DOMAIN-SUFFIX,sohu-inc.com
-DOMAIN-SUFFIX,sohu.com
-DOMAIN-SUFFIX,sohucs.com
-DOMAIN-SUFFIX,sohuno.com
-DOMAIN-SUFFIX,sohurdc.com
-DOMAIN-SUFFIX,v-56.com
 
 # Sony
 DOMAIN-SUFFIX,playstation.com
@@ -291,36 +173,6 @@ DOMAIN-SUFFIX,playstationnetwork.com
 DOMAIN-SUFFIX,sony.com
 DOMAIN-SUFFIX,sonyentertainmentnetwork.com
 
-# Tencent
-DOMAIN-SUFFIX,foxmail.com
-DOMAIN-SUFFIX,gtimg.com
-DOMAIN-SUFFIX,idqqimg.com
-DOMAIN-SUFFIX,igamecj.com
-DOMAIN-SUFFIX,myapp.com
-DOMAIN-SUFFIX,myqcloud.com
-DOMAIN-SUFFIX,qq.com
-DOMAIN-SUFFIX,qqmail.com
-DOMAIN-SUFFIX,qqurl.com
-DOMAIN-SUFFIX,smtcdns.com
-DOMAIN-SUFFIX,smtcdns.net
-DOMAIN-SUFFIX,soso.com
-DOMAIN-SUFFIX,tencent-cloud.net
-DOMAIN-SUFFIX,tencent.com
-DOMAIN-SUFFIX,tencentmind.com
-DOMAIN-SUFFIX,tenpay.com
-DOMAIN-SUFFIX,wechat.com
-DOMAIN-SUFFIX,weixin.com
-DOMAIN-SUFFIX,weiyun.com
-
-# Vip 唯品会
-DOMAIN-SUFFIX,appsimg.com
-DOMAIN-SUFFIX,appvipshop.com
-DOMAIN-SUFFIX,vip.com
-DOMAIN-SUFFIX,vipstatic.com
-
-# Ximalaya 喜马拉雅
-DOMAIN-SUFFIX,ximalaya.com
-DOMAIN-SUFFIX,xmcdn.com
 
 # Xunlei 迅雷
 DOMAIN-SUFFIX,00cdn.com
