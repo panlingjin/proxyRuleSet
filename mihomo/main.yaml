@@ -155,7 +155,7 @@ rules:
   - RULE-SET,apple_domain,直连
   - RULE-SET,proxylite,节点选择
   - RULE-SET,shouhou,守候影院
-  - RULE-SET,Ai,OpenAi
+  - RULE-SET,openai_domain,OpenAi
   - RULE-SET,youtube_domain,YouTube
   - RULE-SET,microsoft_domain,Microsoft
   - RULE-SET,telegram_domain,Telegram
@@ -189,9 +189,9 @@ rule-providers:
   shouhou:
     <<: *class
     url: "https://raw.githubusercontent.com/panlingjin/clashRule/refs/heads/main/openclash/Shouhou.list"
-  Ai:
-    <<: *class
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list"
+  openai_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs"
   cn_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
