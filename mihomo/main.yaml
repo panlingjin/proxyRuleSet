@@ -106,8 +106,10 @@ proxy-groups:
     filter: "(?i)(新|sg|singapore)"
 
   - name: 台湾
-    type: select
+    type: url-test
     include-all: true
+    tolerance: 50
+    interval: 300
     filter: "(?i)台|tw|taiwan"
 
   - name: 日本
@@ -145,6 +147,7 @@ rules:
   - RULE-SET,youtube_domain,YouTube
   - RULE-SET,microsoft_domain,Microsoft
   - RULE-SET,telegram_domain,Telegram
+  - RULE-SET,twitter_domain,节点选择
   - RULE-SET,netflix_domain,NETFLIX
   - RULE-SET,disney_domain,Disney
   - RULE-SET,spotify_domain,Spotify
@@ -155,6 +158,7 @@ rules:
     # IP
   - RULE-SET,netflix_ip,NETFLIX,no-resolve
   - RULE-SET,telegram_ip,Telegram,no-resolve
+  - RULE-SET,twitter_ip,节点选择,no-resolve
   - RULE-SET,cn_ip,直连
   - MATCH,漏网之鱼
 
@@ -190,7 +194,9 @@ rule-providers:
   cn_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
-
+  twitter_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
   github_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
@@ -203,9 +209,6 @@ rule-providers:
   youtube_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
-  google_domain:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
   telegram_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
@@ -233,3 +236,6 @@ rule-providers:
   private_ip:
     <<: *ip
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
+  twitter_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"
