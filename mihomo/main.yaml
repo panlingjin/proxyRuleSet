@@ -134,6 +134,7 @@ proxy-groups:
     filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"
 
 rules:
+  - RULE-SET,private_ip,直连,no-resolve
   - RULE-SET,private_domain,直连
   - RULE-SET,direct_domain,直连
   - RULE-SET,apple_domain,直连
@@ -149,8 +150,8 @@ rules:
   - RULE-SET,spotify_domain,Spotify
   - RULE-SET,speedtest_domain,Speedtest
   - RULE-SET,proxyGFWlist,节点选择
-  - RULE-SET,geolocation-!cn,节点选择
   - RULE-SET,cn_domain,直连
+  - RULE-SET,geolocation-!cn,节点选择
     # IP
   - RULE-SET,netflix_ip,NETFLIX,no-resolve
   - RULE-SET,telegram_ip,Telegram,no-resolve
@@ -229,3 +230,6 @@ rule-providers:
   telegram_ip:
     <<: *ip
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
+  private_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
