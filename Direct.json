@@ -1,9 +1,0 @@
-{
-  "version": 1,
-  "rules": [
-    {
-      "domain": [],
-      "domain_suffix": ["ptvicomo.net", "hdpt.xyz", "ptcafe.club", "icc2022.com"]
-    }
-  ]
-}

@@ -1,1 +1,1 @@
-# clashRule
+# ProxyRule
