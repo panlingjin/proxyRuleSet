@@ -1,0 +1,229 @@
+proxies:
+  - name: "直连"
+    type: direct
+    udp: true
+
+pr:
+  &pr {
+    type: select,
+    proxies:
+      [
+        节点选择,
+        香港自动,
+        香港手动,
+        新加坡自动,
+        新加坡手动,
+        台湾,
+        日本,
+        美国,
+        其它地区,
+        手动切换,
+        直连,
+      ],
+  }
+
+  # p: &p {type: url-test, include-all: true, tolerance: 20, interval: 300}
+
+proxy-groups:
+  - name: 节点选择
+    type: select
+    proxies:
+      [香港自动, 香港手动, 新加坡自动, 新加坡手动, 台湾, 日本, 美国, 其它地区, 手动切换, 直连]
+
+  - name: Telegram
+    <<: *pr
+
+  - name: YouTube
+    <<: *pr
+
+  - name: NETFLIX
+    <<: *pr
+
+  - name: Disney
+    <<: *pr
+
+  - name: 守候影院
+    type: select
+    include-all: true
+
+  - name: OpenAi
+    <<: *pr
+
+  - name: Microsoft
+    <<: *pr
+
+  - name: Spotify
+    <<: *pr
+
+  - name: Speedtest
+    <<: *pr
+
+  # - name: Apple
+  #   <<: *pr
+
+  # - name: 全球直连
+  #   type: select
+  #   proxies: [直连, 节点选择]
+
+  - name: 漏网之鱼
+    <<: *pr
+
+  #分隔,下面是地区分组
+  - name: 香港自动
+    type: url-test
+    include-all: true
+    tolerance: 50
+    interval: 300
+    filter: "(?i)港|hk|hongkong|hong kong"
+
+  - name: 香港手动
+    type: select
+    include-all: true
+    filter: "(?i)港|hk|hongkong|hong kong"
+
+  - name: 新加坡自动
+    type: url-test
+    include-all: true
+    tolerance: 50
+    interval: 300
+    filter: "(?i)(新|sg|singapore)"
+
+  - name: 新加坡手动
+    type: select
+    include-all: true
+    filter: "(?i)(新|sg|singapore)"
+
+  - name: 台湾
+    type: url-test
+    include-all: true
+    tolerance: 50
+    interval: 300
+    filter: "(?i)台|tw|taiwan"
+
+  - name: 日本
+    type: url-test
+    interval: 300
+    tolerance: 50
+    include-all: true
+    filter: "(?i)日|jp|japan"
+
+  - name: 美国
+    type: url-test
+    interval: 300
+    tolerance: 50
+    include-all: true
+    filter: "(?i)美|us|unitedstates|united states"
+
+  - name: 手动切换
+    type: select
+    include-all: true
+
+  - name: 其它地区
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"
+
+rules:
+  - RULE-SET,private_ip,直连,no-resolve
+  - RULE-SET,private_domain,直连
+  - RULE-SET,direct_domain,直连
+  - RULE-SET,apple_domain,直连
+  - RULE-SET,proxylite,节点选择
+  - RULE-SET,shouhou,守候影院
+  - RULE-SET,github_domain,节点选择
+  - RULE-SET,openai_domain,OpenAi
+  - RULE-SET,youtube_domain,YouTube
+  - RULE-SET,microsoft_domain,Microsoft
+  - RULE-SET,telegram_domain,Telegram
+  - RULE-SET,twitter_domain,节点选择
+  - RULE-SET,netflix_domain,NETFLIX
+  - RULE-SET,disney_domain,Disney
+  - RULE-SET,spotify_domain,Spotify
+  - RULE-SET,speedtest_domain,Speedtest
+  - RULE-SET,proxyGFWlist,节点选择
+  - RULE-SET,cn_domain,直连
+  - RULE-SET,geolocation-!cn,节点选择
+    # IP
+  - RULE-SET,netflix_ip,NETFLIX,no-resolve
+  - RULE-SET,telegram_ip,Telegram,no-resolve
+  - RULE-SET,twitter_ip,节点选择,no-resolve
+  - RULE-SET,cn_ip,直连
+  - MATCH,漏网之鱼
+
+rule-anchor:
+  ip: &ip { type: http, interval: 86400, behavior: ipcidr, format: mrs }
+  domain: &domain { type: http, interval: 86400, behavior: domain, format: mrs }
+  class: &class { type: http, interval: 86400, behavior: classical, format: text }
+rule-providers:
+  private_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+  direct_domain:
+    <<: *class
+    url: "https://raw.githubusercontent.com/panlingjin/clashRule/refs/heads/main/Direct.list"
+  proxylite:
+    <<: *class
+    url: "https://raw.githubusercontent.com/panlingjin/clashRule/refs/heads/main/ProxyLite.list"
+  proxyGFWlist:
+    <<: *class
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
+  shouhou:
+    <<: *class
+    url: "https://raw.githubusercontent.com/panlingjin/clashRule/refs/heads/main/Shouhou.list"
+  # apple_acl:
+  #   <<: *class
+  #   url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list"
+  apple_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
+  openai_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs"
+  cn_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+  twitter_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
+  github_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
+  microsoft_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
+  speedtest_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"
+  youtube_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
+  telegram_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
+  netflix_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
+  disney_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs"
+  spotify_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs"
+  geolocation-!cn:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
+  cn_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
+  netflix_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"
+  telegram_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
+  private_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
+  twitter_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"
