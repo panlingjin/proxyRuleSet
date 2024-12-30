@@ -95,8 +95,18 @@ proxy-groups:
   - { name: 🍎 Apple, type: select, proxies: [🟢 直连, 🚀 节点选择] }
   - { name: 🎯 全球直连, type: select, proxies: [🟢 直连, 🚀 节点选择] }
   - { name: 🐟 漏网之鱼, <<: *pr }
-  - { name: 🇭🇰 香港节点, type: select, include-all: true, filter: "(?i)港|hk|hongkong|hong kong" }
-  - { name: 🇯🇵 日本节点, type: select, include-all: true, filter: "(?i)日|jp|japan" }
+  - {
+      name: 🇭🇰 香港节点,
+      type: select,
+      include-all: true,
+      filter: "(?i)港|hk|hongkong|hong kong",
+    }
+  - {
+      name: 🇯🇵 日本节点,
+      type: select,
+      include-all: true,
+      filter: "(?i)日|jp|japan",
+    }
   - {
       name: 🇺🇲 美国节点,
       type: select,
@@ -179,7 +189,8 @@ rule-anchor:
   ip: &ip { type: http, interval: 86400, behavior: ipcidr, format: mrs }
   domain: &domain { type: http, interval: 86400, behavior: domain, format: mrs }
   qcy: &qcy { type: http, interval: 86400, behavior: domain, format: text }
-  class: &class { type: http, interval: 86400, behavior: classical, format: text }
+  class:
+    &class { type: http, interval: 86400, behavior: classical, format: text }
 rule-providers:
   private_domain:
     {
@@ -187,10 +198,20 @@ rule-providers:
       url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs",
     }
   direct1:
-    { <<: *class, url: "https://raw.githubusercontent.com/qichiyuhub/rule/master/Direct.list" }
+    {
+      <<: *class,
+      url: "https://raw.githubusercontent.com/qichiyuhub/rule/master/Direct.list",
+    }
   proxylite:
-    { <<: *class, url: "https://raw.githubusercontent.com/qichiyuhub/rule/master/ProxyLite.list" }
-  ai: { <<: *class, url: "https://raw.githubusercontent.com/qichiyuhub/rule/master/AI.list" }
+    {
+      <<: *class,
+      url: "https://raw.githubusercontent.com/qichiyuhub/rule/master/ProxyLite.list",
+    }
+  ai:
+    {
+      <<: *class,
+      url: "https://raw.githubusercontent.com/qichiyuhub/rule/master/AI.list",
+    }
   youtube_domain:
     {
       <<: *domain,
