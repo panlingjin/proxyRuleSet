@@ -1,7 +1,7 @@
 # url 里填写自己的订阅,名称不能重复
 proxy-providers:
   守候网络:
-    url: "https://sub1.sntp.dev/baseStr?token=df140529aae2e2d8362d1f5a70bc5c63"
+    url: ""
     type: http
     interval: 1800
     health-check:
@@ -13,24 +13,7 @@ proxy-providers:
     proxy: 直连
     exclude-filter: "2.00x"
 
-unified-delay: true
-tcp-concurrent: true
 global-client-fingerprint: chrome
-
-sniffer:
-  enable: true
-  sniff:
-    HTTP:
-      ports: [80, 8080-8880]
-      override-destination: true
-    TLS:
-      ports: [443, 8443]
-    QUIC:
-      ports: [443, 8443]
-  skip-domain:
-    - "dlg.io.mi.com"
-    - "+.push.apple.com"
-    - "+.apple.com"
 
 proxies:
   - name: "直连"
