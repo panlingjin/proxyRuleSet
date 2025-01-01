@@ -1,7 +1,7 @@
 # url 里填写自己的订阅,名称不能重复
 proxy-providers:
   守候网络:
-    url: ""
+    url: "https://sub1.sntp.dev/baseStr?token=df140529aae2e2d8362d1f5a70bc5c63"
     type: http
     interval: 1800
     health-check:
