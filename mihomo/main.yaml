@@ -178,9 +178,9 @@ rules:
   - RULE-SET,steam_domain,游戏平台
   - RULE-SET,spotify_domain,Spotify
   - RULE-SET,speedtest_domain,Speedtest
-  - RULE-SET,proxyGFWlist,节点选择
-  - RULE-SET,cn_domain,直连
+  # - RULE-SET,proxyGFWlist,节点选择
   - RULE-SET,geolocation-!cn,节点选择
+  - RULE-SET,cn_domain,直连
     # IP
   - RULE-SET,netflix_ip,NETFLIX,no-resolve
   - RULE-SET,telegram_ip,Telegram,no-resolve
@@ -203,9 +203,9 @@ rule-providers:
   proxylite:
     <<: *class
     url: "https://raw.githubusercontent.com/panlingjin/clashRule/refs/heads/main/ProxyLite.list"
-  proxyGFWlist:
-    <<: *class
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
+  # proxyGFWlist:
+  #   <<: *class
+  #   url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
   shouhou:
     <<: *class
     url: "https://raw.githubusercontent.com/panlingjin/clashRule/refs/heads/main/Shouhou.list"
