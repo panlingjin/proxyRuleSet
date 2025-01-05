@@ -3,7 +3,7 @@ proxy-providers:
   守候网络:
     url: ""
     type: http
-    interval: 1800
+    interval: 3600
     health-check:
       {
         enable: true,
@@ -23,10 +23,6 @@ sniffer:
       ports: [443, 8443]
     QUIC:
       ports: [443, 8443]
-  skip-domain:
-    - "dlg.io.mi.com"
-    - "+.push.apple.com"
-    - "+.apple.com"
 
 proxies:
   - name: "直连"
@@ -88,6 +84,9 @@ proxy-groups:
     include-all: true
 
   - name: OpenAi
+    <<: *pr
+
+  - name: 游戏平台
     <<: *pr
 
   - name: Microsoft
@@ -175,6 +174,8 @@ rules:
   - RULE-SET,twitter_domain,节点选择
   - RULE-SET,netflix_domain,NETFLIX
   - RULE-SET,disney_domain,Disney
+  - RULE-SET,epic_domain,游戏平台
+  - RULE-SET,steam_domain,游戏平台
   - RULE-SET,spotify_domain,Spotify
   - RULE-SET,speedtest_domain,Speedtest
   - RULE-SET,proxyGFWlist,节点选择
@@ -244,6 +245,12 @@ rule-providers:
   spotify_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs"
+  steam_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
+  epic_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/epicgames.mrs"
   geolocation-!cn:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
