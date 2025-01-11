@@ -3,7 +3,7 @@ proxy-providers:
   守候网络:
     url: ""
     type: http
-    interval: 3600
+    interval: 86400
     health-check:
       {
         enable: true,
@@ -42,7 +42,6 @@ pr:
         台湾,
         日本,
         美国,
-        其它地区,
         手动切换,
         直连,
       ],
@@ -62,47 +61,55 @@ proxy-groups:
         台湾,
         日本,
         美国,
-        其它地区,
         手动切换,
         直连,
       ]
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Flight.png"
 
   - name: Telegram
     <<: *pr
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Telegram.png"
 
   - name: YouTube
     <<: *pr
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/YouTube.png"
 
   - name: NETFLIX
     <<: *pr
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Netflix.png"
 
   - name: Disney
     <<: *pr
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Disney.png"
 
   - name: 守候影院
     type: select
     include-all: true
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Emby.png"
 
   - name: OpenAi
     <<: *pr
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/ChatGPT.png"
 
   - name: 游戏平台
     <<: *pr
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Steam.png"
 
   - name: Microsoft
     <<: *pr
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Microsoft.png"
 
   - name: Spotify
     <<: *pr
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Spotify.png"
 
   - name: Speedtest
     <<: *pr
-
-  # - name: Apple
-  #   <<: *pr
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/SpeedTest.png"
 
   - name: 漏网之鱼
     <<: *pr
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Fish.png"
 
   #分隔,下面是地区分组
   - name: 香港自动
@@ -111,11 +118,13 @@ proxy-groups:
     tolerance: 50
     interval: 300
     filter: "(?i)港|hk|hongkong|hong kong"
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Hong_Kong.png"
 
   - name: 香港手动
     type: select
     include-all: true
     filter: "(?i)港|hk|hongkong|hong kong"
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Hong_Kong.png"
 
   - name: 新加坡自动
     type: url-test
@@ -123,11 +132,13 @@ proxy-groups:
     tolerance: 50
     interval: 300
     filter: "(?i)(新|sg|singapore)"
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Singapore.png"
 
   - name: 新加坡手动
     type: select
     include-all: true
     filter: "(?i)(新|sg|singapore)"
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Singapore.png"
 
   - name: 台湾
     type: url-test
@@ -135,6 +146,7 @@ proxy-groups:
     tolerance: 50
     interval: 300
     filter: "(?i)台|tw|taiwan"
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Taiwan_Province.png"
 
   - name: 日本
     type: url-test
@@ -142,6 +154,7 @@ proxy-groups:
     tolerance: 50
     include-all: true
     filter: "(?i)日|jp|japan"
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Japan.png"
 
   - name: 美国
     type: url-test
@@ -149,15 +162,12 @@ proxy-groups:
     tolerance: 50
     include-all: true
     filter: "(?i)美|us|unitedstates|united states"
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/USA.png"
 
   - name: 手动切换
     type: select
     include-all: true
-
-  - name: 其它地区
-    type: select
-    include-all: true
-    filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"
+    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Global.png"
 
 rules:
   - RULE-SET,private_ip,直连,no-resolve
@@ -178,7 +188,6 @@ rules:
   - RULE-SET,steam_domain,游戏平台
   - RULE-SET,spotify_domain,Spotify
   - RULE-SET,speedtest_domain,Speedtest
-  # - RULE-SET,proxyGFWlist,节点选择
   - RULE-SET,geolocation-!cn,节点选择
   - RULE-SET,cn_domain,直连
     # IP
@@ -203,9 +212,6 @@ rule-providers:
   proxylite:
     <<: *class
     url: "https://raw.githubusercontent.com/panlingjin/clashRule/refs/heads/main/ProxyLite.list"
-  # proxyGFWlist:
-  #   <<: *class
-  #   url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
   shouhou:
     <<: *class
     url: "https://raw.githubusercontent.com/panlingjin/clashRule/refs/heads/main/Shouhou.list"
