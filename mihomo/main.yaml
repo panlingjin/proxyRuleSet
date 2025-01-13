@@ -174,8 +174,8 @@ rules:
   - RULE-SET,private_domain,直连
   - RULE-SET,direct_domain,直连
   - RULE-SET,apple_domain,直连
-  - RULE-SET,proxylite,节点选择
   - RULE-SET,shouhou,守候影院
+  - RULE-SET,proxylite,节点选择
   - RULE-SET,github_domain,节点选择
   - RULE-SET,openai_domain,OpenAi
   - RULE-SET,youtube_domain,YouTube
