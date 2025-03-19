@@ -208,13 +208,13 @@ rule-providers:
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
   direct_domain:
     <<: *class
-    url: "https://raw.githubusercontent.com/panlingjin/clashRule/refs/heads/main/Direct.list"
+    url: "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/Direct.list"
   proxylite:
     <<: *class
-    url: "https://raw.githubusercontent.com/panlingjin/clashRule/refs/heads/main/ProxyLite.list"
+    url: "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/ProxyLite.list"
   shouhou:
     <<: *class
-    url: "https://raw.githubusercontent.com/panlingjin/clashRule/refs/heads/main/Shouhou.list"
+    url: "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/Shouhou.list"
   apple_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
