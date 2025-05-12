@@ -13,6 +13,7 @@ proxy-providers:
     proxy: 直连
     exclude-filter: "2.00x"
 
+# 域名嗅探
 sniffer:
   enable: true
   sniff:
@@ -23,6 +24,25 @@ sniffer:
       ports: [443, 8443]
     QUIC:
       ports: [443, 8443]
+
+tun:
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  mtu: 9000
+  gso: true
+  gso-max-size: 65536
+
+# geo 数据
+geodata-mode: false
+geodata-loader: standard
+geox-url:
+  geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+  asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
+geo-auto-update: true
+geo-update-interval: 48
 
 proxies:
   - name: "直连"
