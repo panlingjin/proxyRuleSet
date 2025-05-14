@@ -47,14 +47,14 @@ sniffer:
 
 dns:
   enable: true
-  listen: '[::]:1053'
+  listen: 0.0.0.0:1053
   ipv6: false
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     - +.lan
     - +.local
-    - GEOSITE:cn
+    - geosite:cn
   fake-ip-filter-mode: blacklist
   respect-rules: true
   default-nameserver:
@@ -66,9 +66,7 @@ dns:
   nameserver:
     - 192.168.10.10
   nameserver-policy:
-    geosite:private,cn:
-      - 192.168.10.10
-    rule-set:apple_domain:
+    geosite:private,cn,apple:
       - 192.168.10.10
     geosite:geolocation-!cn:
       - https://8.8.8.8/dns-query
