@@ -47,7 +47,6 @@ geo-update-interval: 48
 proxies:
   - name: "直连"
     type: direct
-    udp: true
 
 pr:
   &pr {

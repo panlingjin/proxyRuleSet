@@ -13,6 +13,10 @@ proxy-providers:
     proxy: 直连
     exclude-filter: "2.00x"
 
+  proxies:
+    - name: "直连"
+      type: direct
+
 log-level: warning
 mode: rule
 find-process-mode: off
@@ -24,7 +28,7 @@ keep-alive-interval: 15
 external-ui: /etc/mihomo/ui
 external-ui-name: zashboard
 external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip
-external-controller: '[::]:9090'
+external-controller: "[::]:9090"
 secret: ""
 allow-lan: true
 port: 8080
@@ -75,7 +79,6 @@ profile:
   store-selected: true
   store-fake-ip: true
 
-
 tun:
   enable: true
   device: utun0
@@ -97,11 +100,6 @@ geox-url:
   asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
 geo-auto-update: true
 geo-update-interval: 48
-
-proxies:
-  - name: "直连"
-    type: direct
-    udp: true
 
 pr:
   &pr {
@@ -309,7 +307,7 @@ rule-providers:
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
   speedtest_domain:
     <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/speedtest.mrs"
   youtube_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
