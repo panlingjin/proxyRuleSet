@@ -13,6 +13,11 @@ proxy-providers:
     proxy: 直连
     exclude-filter: "2.00x"
 
+unified-delay: true
+tcp-concurrent: true
+keep-alive-idle: 600
+keep-alive-interval: 15
+
 # 域名嗅探
 sniffer:
   enable: true
