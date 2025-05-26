@@ -34,6 +34,9 @@ tun:
   mtu: 9000
   gso: true
   gso-max-size: 65536
+  dns-hijack:
+    - any:53
+    - tcp://any:53
 
 # geo 数据
 geodata-mode: false
