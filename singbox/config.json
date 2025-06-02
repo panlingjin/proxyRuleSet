@@ -102,7 +102,7 @@
     {
       "tag": "漏网之鱼",
       "type": "selector",
-      "outbounds": ["直连", "节点选择"]
+      "outbounds": ["直连", "节点选择", "香港手动"]
     },
     { "tag": "手动切换", "type": "selector", "outbounds": ["{all}"] },
     {
@@ -376,8 +376,8 @@
   },
   "experimental": {
     "clash_api": {
-      "external_controller": "0.0.0.0:9095",
-      "external_ui": "/etc/sing-box/ui",
+      "external_controller": "0.0.0.0:9090",
+      "external_ui": "ui",
       "secret": "",
       "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
       "external_ui_download_detour": "直连",
