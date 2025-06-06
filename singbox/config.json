@@ -32,7 +32,7 @@
       { "rule_set": "geosite-geolocation-!cn", "server": "dns_proxy" }
     ],
     "final": "dns_direct",
-    "strategy": "ipv4_only"
+    "strategy": "prefer_ipv4"
   },
   "endpoints": [],
   "inbounds": [
@@ -187,11 +187,6 @@
       { "protocol": "dns", "action": "hijack-dns" },
       { "clash_mode": "direct", "outbound": "直连" },
       { "clash_mode": "global", "outbound": "GLOBAL" },
-      {
-        "domain": ["clash.razord.top", "yacd.metacubex.one", "yacd.haishan.me", "d.metacubex.one"],
-        "outbound": "直连"
-      },
-      { "ip_is_private": true, "outbound": "direct" },
       { "rule_set": "geosite-private", "outbound": "直连" },
       { "rule_set": "geosite-youtube", "outbound": "YouTube" },
       { "rule_set": "geosite-github", "outbound": "节点选择" },
@@ -205,7 +200,7 @@
       },
 
       {
-        "rule_set": ["geosite-steam", "geosite-epicgames"],
+        "rule_set": ["geosite-epicgames"],
         "outbound": "游戏平台"
       },
       {
@@ -278,13 +273,6 @@
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/apple.srs",
-        "download_detour": "节点选择"
-      },
-      {
-        "tag": "geosite-steam ",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/steam.srs",
         "download_detour": "节点选择"
       },
       {
@@ -379,8 +367,7 @@
       "external_controller": "0.0.0.0:9090",
       "external_ui": "ui",
       "secret": "",
-      "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
-      "external_ui_download_detour": "直连",
+      "external_ui_download_detour": "节点选择",
       "default_mode": "rule"
     },
     "cache_file": {
