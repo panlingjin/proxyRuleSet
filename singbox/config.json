@@ -25,13 +25,13 @@
       }
     ],
     "rules": [
-      { "outbound": "any", "server": "dns_resolver", "disable_cache": true },
+      { "outbound": "any", "server": "dns_direct" },
       { "clash_mode": "direct", "server": "dns_direct" },
       { "clash_mode": "global", "server": "dns_proxy" },
       { "rule_set": "geosite-cn", "server": "dns_direct" },
       { "rule_set": "geosite-geolocation-!cn", "server": "dns_proxy" }
     ],
-    "final": "dns_direct",
+    "final": "dns_proxy",
     "strategy": "prefer_ipv4"
   },
   "endpoints": [],
@@ -185,9 +185,9 @@
     "rules": [
       { "action": "sniff" },
       { "protocol": "dns", "action": "hijack-dns" },
+      { "ip_is_private": true, "outbound": "直连" },
       { "clash_mode": "direct", "outbound": "直连" },
       { "clash_mode": "global", "outbound": "GLOBAL" },
-      { "rule_set": "geosite-private", "outbound": "直连" },
       { "rule_set": "geosite-youtube", "outbound": "YouTube" },
       { "rule_set": "geosite-github", "outbound": "节点选择" },
       {
@@ -367,8 +367,7 @@
       "external_controller": "0.0.0.0:9090",
       "external_ui": "ui",
       "secret": "",
-      "external_ui_download_detour": "节点选择",
-      "default_mode": "rule"
+      "external_ui_download_detour": "节点选择"
     },
     "cache_file": {
       "enabled": true,
