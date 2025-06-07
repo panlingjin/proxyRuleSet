@@ -186,6 +186,9 @@
       { "protocol": "dns", "action": "hijack-dns" },
       { "clash_mode": "direct", "outbound": "直连" },
       { "clash_mode": "global", "outbound": "节点选择" },
+      { "rule_set": ["source-direct"], "outbound": "直连" },
+      { "rule_set": ["source-proxy"], "outbound": "节点选择" },
+      { "rule_set": ["source-shouhou"], "outbound": "守候影院" },
       { "rule_set": ["geosite-apple", "geoip-apple"], "outbound": "直连" },
       { "rule_set": "geosite-microsoft", "outbound": "Microsoft" },
       { "rule_set": "geosite-github", "outbound": "节点选择" },
@@ -396,7 +399,28 @@
         "format": "binary",
         "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/private.srs",
         "download_detour": "节点选择"
-      }
+      },
+      {
+        "tag": "source-direct",
+        "type": "remote",
+        "format": "source",
+        "url": "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/singbox/rule/direct.json",
+        "download_detour": "节点选择"
+      },
+      {
+        "tag": "source-proxy",
+        "type": "remote",
+        "format": "source",
+        "url": "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/singbox/rule/proxy.json",
+        "download_detour": "节点选择"
+      },
+      {
+        "tag": "source-shouhou",
+        "type": "remote",
+        "format": "source",
+        "url": "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/singbox/rule/shouhou.json",
+        "download_detour": "节点选择"
+      },
     ]
   },
   "experimental": {
