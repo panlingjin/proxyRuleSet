@@ -28,11 +28,11 @@
       { "outbound": "any", "server": "dns_direct" },
       { "clash_mode": "direct", "server": "dns_direct" },
       { "clash_mode": "global", "server": "dns_proxy" },
-      { "rule_set": "geosite-cn", "server": "dns_direct" },
+      { "rule_set": ["geosite-cn", "source-direct"], "server": "dns_direct" },
       { "rule_set": "geosite-geolocation-!cn", "server": "dns_proxy" }
     ],
     "final": "dns_proxy",
-    "strategy": "prefer_ipv4"
+    "strategy": "ipv4_only"
   },
   "endpoints": [],
   "inbounds": [
@@ -180,7 +180,7 @@
   ],
   "route": {
     "auto_detect_interface": true,
-    "final": "直连",
+    "final": "漏网之鱼",
     "rules": [
       { "action": "sniff" },
       { "protocol": "dns", "action": "hijack-dns" },
@@ -402,37 +402,63 @@
       },
       {
         "tag": "source-direct",
-        "type": "remote",
-        "format": "source",
-        "url": "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/singbox/rule/direct.json",
-        "download_detour": "节点选择"
+        "type": "inline",
+        "rules": [
+          {
+            "domain_suffix": [
+              "tslsmart.com",
+              "panlingjin.xyz",
+              "sonos.com",
+              "statsig.com",
+              "getkoala.com",
+              "koala.live",
+              "nvidia.com",
+              "ptvicomo.net",
+              "hdpt.xyz",
+              "ptcafe.club",
+              "icc2022.com",
+              "ptlover.cc",
+              "bugutv.vip",
+              "sewerpt.com",
+              "123in.link",
+              "123panfx.com"
+            ],
+            "domain": ["pt.cdfile.org"]
+          }
+        ]
       },
       {
         "tag": "source-proxy",
-        "type": "remote",
-        "format": "source",
-        "url": "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/singbox/rule/proxy.json",
-        "download_detour": "节点选择"
+        "type": "inline",
+        "rules": [
+          {
+            "domain_suffix": ["qichiyu.com", "codeium.com", "tgstat.com", "metacubex.one", "movie-pilot.org", "home-assistant.io", "alist.nn.ci"]
+          }
+        ]
       },
       {
         "tag": "source-shouhou",
-        "type": "remote",
-        "format": "source",
-        "url": "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/singbox/rule/shouhou.json",
-        "download_detour": "节点选择"
-      },
+        "type": "inline",
+        "rules": [
+          {
+            "domain_suffix": ["cn2gias.uk"],
+            "domain": ["emby.cn2gias.uk"]
+          }
+        ]
+      }
     ]
   },
   "experimental": {
     "clash_api": {
       "external_controller": "0.0.0.0:9090",
-      "external_ui": "ui",
+      "external_ui": "/etc/sing-box/ui",
       "external_ui_download_url": "https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip",
       "secret": "",
       "external_ui_download_detour": "节点选择"
     },
     "cache_file": {
       "enabled": true,
+      "path": "/etc/sing-box",
       "store_fakeip": false
     }
   }
