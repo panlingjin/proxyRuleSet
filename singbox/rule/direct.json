@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "domain_suffix": [
+        "tslsmart.com",
+        "panlingjin.xyz",
+        "sonos.com",
+        "statsig.com",
+        "getkoala.com",
+        "koala.live",
+        "nvidia.com",
+        "ptvicomo.net",
+        "hdpt.xyz",
+        "ptcafe.club",
+        "icc2022.com",
+        "ptlover.cc",
+        "bugutv.vip",
+        "sewerpt.com",
+        "123in.link",
+        "123panfx.com"
+      ],
+      "domain": ["pt.cdfile.org"]
+    }
+  ]
+}
