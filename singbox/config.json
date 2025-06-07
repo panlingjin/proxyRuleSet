@@ -85,12 +85,6 @@
       "outbounds": ["香港自动", "香港手动", "节点选择", "新加坡自动", "新加坡手动", "日本节点", "台湾节点", "美国节点", "手动切换", "直连"]
     },
     {
-      "tag": "Speedtest",
-      "type": "selector",
-      "outbounds": ["直连", "节点选择", "香港自动", "香港手动", "新加坡自动", "新加坡手动", "日本节点", "台湾节点", "美国节点", "手动切换"]
-    },
-
-    {
       "tag": "守候影院",
       "type": "selector",
       "outbounds": ["{all}"]
@@ -106,6 +100,11 @@
       "outbounds": ["直连", "节点选择", "香港自动", "香港手动"]
     },
     {
+      "tag": "Speedtest",
+      "type": "selector",
+      "outbounds": ["直连", "节点选择", "香港自动", "香港手动", "新加坡自动", "新加坡手动", "日本节点", "台湾节点", "美国节点", "手动切换"]
+    },
+    {
       "tag": "Microsoft",
       "type": "selector",
       "outbounds": ["直连", "香港自动", "香港手动"]
@@ -115,7 +114,6 @@
       "type": "selector",
       "outbounds": ["直连", "节点选择", "香港手动"]
     },
-    { "tag": "手动切换", "type": "selector", "outbounds": ["{all}"] },
     {
       "tag": "香港自动",
       "type": "urltest",
@@ -176,6 +174,7 @@
       "interval": "10m",
       "tolerance": 50
     },
+    { "tag": "手动切换", "type": "selector", "outbounds": ["{all}"] },
     { "tag": "直连", "type": "direct" }
   ],
   "route": {
@@ -190,13 +189,13 @@
       { "rule_set": ["source-proxy"], "outbound": "节点选择" },
       { "rule_set": ["source-shouhou"], "outbound": "守候影院" },
       { "rule_set": ["geosite-apple", "geoip-apple"], "outbound": "直连" },
-      { "rule_set": "geosite-microsoft", "outbound": "Microsoft" },
-      { "rule_set": "geosite-github", "outbound": "节点选择" },
       { "rule_set": "geosite-youtube", "outbound": "YouTube" },
+      { "rule_set": "geosite-chat", "outbound": "AI" },
       {
         "rule_set": ["geosite-google", "geoip-google"],
         "outbound": "节点选择"
       },
+      { "rule_set": "geosite-github", "outbound": "节点选择" },
       {
         "rule_set": ["geosite-telegram", "geoip-telegram"],
         "outbound": "Telegram"
@@ -213,6 +212,7 @@
         "rule_set": ["geosite-disney"],
         "outbound": "Disney"
       },
+      { "rule_set": "geosite-microsoft", "outbound": "Microsoft" },
       {
         "rule_set": ["geosite-steam", "geosite-epicgames"],
         "outbound": "游戏平台"
@@ -225,7 +225,6 @@
         "rule_set": ["geosite-speedtest"],
         "outbound": "Speedtest"
       },
-      { "rule_set": "geosite-chat", "outbound": "AI" },
       { "rule_set": "geosite-geolocation-!cn", "outbound": "节点选择" },
       { "rule_set": ["geosite-cn", "geoip-cn"], "outbound": "直连" }
     ],
