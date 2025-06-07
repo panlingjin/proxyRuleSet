@@ -459,7 +459,7 @@
     },
     "cache_file": {
       "enabled": true,
-      "path": "/etc/sing-box",
+      "path": "/etc/sing-box/cache.db",
       "store_fakeip": false
     }
   }
