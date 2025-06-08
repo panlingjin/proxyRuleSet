@@ -28,7 +28,7 @@
       { "outbound": "any", "server": "dns_direct" },
       { "clash_mode": "direct", "server": "dns_direct" },
       { "clash_mode": "global", "server": "dns_proxy" },
-      { "rule_set": ["geosite-cn", "source-direct"], "server": "dns_direct" },
+      { "rule_set": ["geosite-cn", "geoip-cn", "source-direct"], "server": "dns_direct" },
       { "rule_set": "geosite-geolocation-!cn", "server": "dns_proxy" }
     ],
     "final": "dns_proxy",
@@ -395,13 +395,6 @@
         "download_detour": "节点选择"
       },
       {
-        "tag": "geoip-private",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/private.srs",
-        "download_detour": "节点选择"
-      },
-      {
         "tag": "source-direct",
         "type": "inline",
         "rules": [
@@ -459,7 +452,7 @@
     },
     "cache_file": {
       "enabled": true,
-      "path": "/etc/sing-box/cache.db",
+      "path": "/var/lib/sing-box/cache.db",
       "store_fakeip": false
     }
   }
