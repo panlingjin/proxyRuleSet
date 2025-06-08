@@ -47,11 +47,11 @@
       "stack": "mixed"
     },
     {
-    "tag": "mixed-in",
-    "type": "mixed",
-    "listen": "0.0.0.0",
-    "listen_port": 7890
-  }
+      "tag": "mixed-in",
+      "type": "mixed",
+      "listen": "0.0.0.0",
+      "listen_port": 7890
+    }
   ],
   "outbounds": [
     {
