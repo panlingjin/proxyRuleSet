@@ -11,31 +11,11 @@ proxy-providers:
         interval: 300,
       }
     proxy: 直连
-    exclude-filter: "2.00x"
 
-  proxies:
-    - name: "直连"
-      type: direct
-
-log-level: warning
-mode: rule
-find-process-mode: off
-ipv6: true
 unified-delay: true
 tcp-concurrent: true
 keep-alive-idle: 600
 keep-alive-interval: 15
-external-ui: /etc/mihomo/ui
-external-ui-name: zashboard
-external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip
-external-controller: "[::]:9090"
-secret: ""
-allow-lan: true
-port: 8080
-socks-port: 1080
-mixed-port: 7890
-redir-port: 7891
-tproxy-port: 7892
 
 # 域名嗅探
 sniffer:
@@ -49,43 +29,7 @@ sniffer:
     QUIC:
       ports: [443, 8443]
 
-dns:
-  enable: true
-  listen: 0.0.0.0:1053
-  ipv6: true
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter:
-    - +.lan
-    - +.local
-    - geosite:cn
-  fake-ip-filter-mode: blacklist
-  respect-rules: true
-  default-nameserver:
-    - 192.168.10.10
-    - 223.5.5.5
-  proxy-server-nameserver:
-    - https://223.5.5.5/dns-query
-    - https://223.6.6.6/dns-query
-  nameserver:
-    - 192.168.10.10
-  nameserver-policy:
-    geosite:private,cn,apple:
-      - 192.168.10.10
-    geosite:geolocation-!cn:
-      - https://8.8.8.8/dns-query
-      - https://1.1.1.1/dns-query
-profile:
-  store-selected: true
-  store-fake-ip: true
-
 tun:
-  enable: true
-  device: utun0
-  stack: mixed
-  auto-route: true
-  auto-redirect: true
-  auto-detect-interface: true
   mtu: 9000
   gso: true
   gso-max-size: 65536
@@ -104,6 +48,10 @@ geox-url:
 geo-auto-update: true
 geo-update-interval: 48
 
+proxies:
+  - name: "直连"
+    type: direct
+
 pr:
   &pr {
     type: select,
@@ -111,9 +59,7 @@ pr:
       [
         节点选择,
         香港自动,
-        香港手动,
         新加坡自动,
-        新加坡手动,
         台湾,
         日本,
         美国,
@@ -130,9 +76,7 @@ proxy-groups:
     proxies:
       [
         香港自动,
-        香港手动,
         新加坡自动,
-        新加坡手动,
         台湾,
         日本,
         美国,
@@ -195,23 +139,11 @@ proxy-groups:
     filter: "(?i)港|hk|hongkong|hong kong"
     icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Hong_Kong.png"
 
-  - name: 香港手动
-    type: select
-    include-all: true
-    filter: "(?i)港|hk|hongkong|hong kong"
-    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Hong_Kong.png"
-
   - name: 新加坡自动
     type: url-test
     include-all: true
     tolerance: 50
     interval: 300
-    filter: "(?i)(新|sg|singapore)"
-    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Singapore.png"
-
-  - name: 新加坡手动
-    type: select
-    include-all: true
     filter: "(?i)(新|sg|singapore)"
     icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Singapore.png"
 
@@ -245,6 +177,7 @@ proxy-groups:
     icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Global.png"
 
 rules:
+  - DOMAIN-SUFFIX,midjourney.com,节点选择
   - RULE-SET,private_ip,直连,no-resolve
   - RULE-SET,private_domain,直连
   - RULE-SET,direct_domain,直连
@@ -254,6 +187,7 @@ rules:
   - RULE-SET,github_domain,节点选择
   - RULE-SET,openai_domain,OpenAi
   - RULE-SET,youtube_domain,YouTube
+  - RULE-SET,google_domain,节点选择
   - RULE-SET,microsoft_domain,Microsoft
   - RULE-SET,telegram_domain,Telegram
   - RULE-SET,twitter_domain,节点选择
@@ -266,6 +200,7 @@ rules:
   - RULE-SET,geolocation-!cn,节点选择
   - RULE-SET,cn_domain,直连
     # IP
+  - RULE-SET,google_ip,节点选择,no-resolve
   - RULE-SET,netflix_ip,NETFLIX,no-resolve
   - RULE-SET,telegram_ip,Telegram,no-resolve
   - RULE-SET,twitter_ip,节点选择,no-resolve
@@ -314,6 +249,9 @@ rule-providers:
   youtube_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
+  google_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
   telegram_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
@@ -350,3 +288,6 @@ rule-providers:
   twitter_ip:
     <<: *ip
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"
+  google_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
