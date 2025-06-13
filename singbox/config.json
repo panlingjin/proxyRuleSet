@@ -7,6 +7,12 @@
   "dns": {
     "servers": [
       {
+        "tag": "dns_proxy",
+        "address": "https://dns.google/dns-query",
+        "address_resolver": "dns_resolver",
+        "detour": "节点选择"
+      },
+      {
         "tag": "dns_resolver",
         "address": "223.5.5.5",
         "detour": "直连"
@@ -16,12 +22,6 @@
         "address": "192.168.10.10",
         "address_resolver": "dns_resolver",
         "detour": "直连"
-      },
-      {
-        "tag": "dns_proxy",
-        "address": "https://dns.google/dns-query",
-        "address_resolver": "dns_resolver",
-        "detour": "节点选择"
       }
     ],
     "rules": [
@@ -178,15 +178,13 @@
       "tag": "美国节点",
       "type": "urltest",
       "outbounds": ["{all}"],
-      "filter": [
-        { "action": "include", "keywords": ["🇺🇸|US|us|美国|美|United States"] },
-        { "action": "exclude", "keywords": ["香港|港|HK|hk|HongKong"] }
-      ],
+      "filter": [{ "action": "include", "keywords": ["🇺🇸|US|us|美国|美|United States"] }],
       "url": "http://www.gstatic.com/generate_204",
       "interval": "10m",
       "tolerance": 50
     },
     { "tag": "手动切换", "type": "selector", "outbounds": ["{all}"] },
+    { "tag": "GLOBAL", "type": "selector", "outbounds": ["{all}"] },
     { "tag": "直连", "type": "direct" }
   ],
   "route": {
