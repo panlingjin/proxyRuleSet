@@ -26,13 +26,13 @@ if [ ! -s "$TEMP_FILE" ]; then
 fi
 
 # 备份原有配置文件（如果存在）
-if [ -f "$TARGET_FILE" ]; then
-    backup_file="${TARGET_FILE}.bak_$(date +%Y%m%d%H%M%S)"
-    if ! cp "$TARGET_FILE" "$backup_file"; then
-        handle_error "配置文件备份失败！"
-    fi
-    echo "已备份原配置: $backup_file"
-fi
+# if [ -f "$TARGET_FILE" ]; then
+#     backup_file="${TARGET_FILE}.bak_$(date +%Y%m%d%H%M%S)"
+#     if ! cp "$TARGET_FILE" "$backup_file"; then
+#         handle_error "配置文件备份失败！"
+#     fi
+#     echo "已备份原配置: $backup_file"
+# fi
 
 # 复制新配置文件
 echo "安装新配置文件..."
