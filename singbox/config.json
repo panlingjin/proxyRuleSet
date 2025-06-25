@@ -8,8 +8,7 @@
     "servers": [
       {
         "tag": "dns_proxy",
-        "address": "https://dns.google/dns-query",
-        "address_resolver": "dns_resolver",
+        "address": "192.168.10.11",
         "detour": "节点选择"
       },
       {
