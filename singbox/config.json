@@ -8,8 +8,7 @@
     "servers": [
       {
         "tag": "dns_proxy",
-        "type": "tls",
-        "server": "8.8.8.8",
+        "server": "tls://8.8.8.8",
         "address_resolver": "dns_resolver",
         "detour": "节点选择"
       },
