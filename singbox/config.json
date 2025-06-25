@@ -8,7 +8,7 @@
     "servers": [
       {
         "tag": "dns_proxy",
-        "server": "tls://8.8.8.8",
+        "address": "https://dns.google/dns-query",
         "address_resolver": "dns_resolver",
         "detour": "节点选择"
       },
@@ -29,7 +29,7 @@
       { "clash_mode": "direct", "server": "dns_direct" },
       { "clash_mode": "global", "server": "dns_proxy" },
       { "rule_set": ["geosite-cn", "geoip-cn", "source-direct"], "server": "dns_direct" },
-      { "rule_set": "geosite-geolocation-!cn", "server": "dns_proxy" }
+      { "rule_set": ["geosite-geolocation-!cn", "source-proxy"], "server": "dns_proxy" }
     ],
     "final": "dns_proxy",
     "strategy": "prefer_ipv4"
