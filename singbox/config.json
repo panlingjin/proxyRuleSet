@@ -10,6 +10,7 @@
         "tag": "dns_proxy",
         "address": "https://dns.google/dns-query",
         "address_resolver": "dns_resolver",
+        "address_strategy": "ipv4_only",
         "detour": "节点选择"
       },
       {
@@ -20,7 +21,6 @@
       {
         "tag": "dns_direct",
         "address": "192.168.10.10",
-        "address_resolver": "dns_resolver",
         "detour": "直连"
       }
     ],
