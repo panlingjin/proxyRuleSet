@@ -62,15 +62,13 @@ pr:
         香港手动,
         新加坡自动,
         新加坡手动,
-        台湾,
-        日本,
-        美国,
+        台湾自动,
+        日本自动,
+        美国自动,
         手动切换,
         直连,
       ],
   }
-
-  # p: &p {type: url-test, include-all: true, tolerance: 20, interval: 300}
 
 proxy-groups:
   - name: 节点选择
@@ -81,9 +79,9 @@ proxy-groups:
         香港手动,
         新加坡自动,
         新加坡手动,
-        台湾,
-        日本,
-        美国,
+        台湾自动,
+        日本自动,
+        美国自动,
         手动切换,
         直连,
       ]
@@ -165,7 +163,7 @@ proxy-groups:
     filter: "(?i)(新|sg|singapore)"
     icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Singapore.png"
 
-  - name: 台湾
+  - name: 台湾自动
     type: url-test
     include-all: true
     tolerance: 50
@@ -173,7 +171,7 @@ proxy-groups:
     filter: "(?i)台|tw|taiwan"
     icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Taiwan_Province.png"
 
-  - name: 日本
+  - name: 日本自动
     type: url-test
     interval: 300
     tolerance: 50
@@ -181,7 +179,7 @@ proxy-groups:
     filter: "(?i)日|jp|japan"
     icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Japan.png"
 
-  - name: 美国
+  - name: 美国自动
     type: url-test
     interval: 300
     tolerance: 50
