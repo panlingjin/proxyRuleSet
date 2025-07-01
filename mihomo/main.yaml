@@ -11,7 +11,6 @@ proxy-providers:
         interval: 300,
       }
     proxy: 直连
-    exclude-filter: "2.00x"
 
 unified-delay: true
 tcp-concurrent: true
@@ -142,6 +141,7 @@ proxy-groups:
     tolerance: 50
     interval: 300
     filter: "(?i)港|hk|hongkong|hong kong"
+    exclude-filter: "2.00x"
     icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Hong_Kong.png"
 
   - name: 香港手动
@@ -156,6 +156,7 @@ proxy-groups:
     tolerance: 50
     interval: 300
     filter: "(?i)(新|sg|singapore)"
+    exclude-filter: "2.00x"
     icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Singapore.png"
 
   - name: 新加坡手动
