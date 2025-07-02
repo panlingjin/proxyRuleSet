@@ -52,6 +52,12 @@
       "type": "mixed",
       "listen": "0.0.0.0",
       "listen_port": 7890
+    },
+    {
+      "type": "direct",
+      "tag": "direct-in",
+      "listen": "::",
+      "listen_port": 53
     }
   ],
   "outbounds": [
