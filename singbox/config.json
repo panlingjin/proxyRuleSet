@@ -52,7 +52,8 @@
       "type": "mixed",
       "listen": "0.0.0.0",
       "listen_port": 7890
-    }
+    },
+    { "tag": "dns-out", "type": "dns" }
   ],
   "outbounds": [
     {
@@ -199,6 +200,7 @@
         "rules": [{ "protocol": "dns" }, { "port": 53 }],
         "action": "hijack-dns"
       },
+      { "protocol": "dns", "outbound": "dns-out" },
       { "ip_is_private": true, "outbound": "直连" },
       { "clash_mode": "direct", "outbound": "直连" },
       { "clash_mode": "global", "outbound": "节点选择" },
