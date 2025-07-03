@@ -44,7 +44,7 @@
       "mtu": 9000,
       "auto_route": true,
       "auto_redirect": true,
-      "stack": "mixed"
+      "stack": "system"
     },
     {
       "tag": "mixed-in",
