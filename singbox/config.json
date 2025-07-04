@@ -25,11 +25,11 @@
       }
     ],
     "rules": [
-      { "outbound": "any", "server": "dns_direct" },
       { "clash_mode": "direct", "server": "dns_direct" },
       { "clash_mode": "global", "server": "dns_proxy" },
       { "rule_set": ["geosite-cn", "geoip-cn", "source-direct"], "server": "dns_direct" },
-      { "rule_set": ["geosite-geolocation-!cn", "source-proxy"], "server": "dns_proxy" }
+      { "rule_set": ["geosite-geolocation-!cn", "source-proxy"], "server": "dns_proxy" },
+      { "outbound": "any", "server": "dns_direct" }
     ],
     "final": "dns_proxy",
     "strategy": "ipv4_only"
