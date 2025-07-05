@@ -22,6 +22,7 @@ DOMAIN-SUFFIX,sewerpt.com
 
 # 域名匹配
 DOMAIN,pt.cdfile.org
+DOMAIN,dnschecker.org
 
 # 123网盘相关
 DOMAIN-SUFFIX,123in.link
