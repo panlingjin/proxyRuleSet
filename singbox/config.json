@@ -28,7 +28,7 @@
       { "outbound": "any", "server": "dns_direct" },
       { "clash_mode": "direct", "server": "dns_direct" },
       { "clash_mode": "global", "server": "dns_proxy" },
-      { "rule_set": ["geosite-cn", "geoip-cn", "source-direct"], "server": "dns_direct" },
+      { "rule_set": ["geosite-cn", "source-direct"], "server": "dns_direct" },
       { "rule_set": ["geosite-geolocation-!cn", "source-proxy"], "server": "dns_proxy" }
     ],
     "final": "dns_proxy",
