@@ -193,12 +193,7 @@
     "final": "漏网之鱼",
     "rules": [
       { "action": "sniff" },
-      {
-        "type": "logical",
-        "mode": "or",
-        "rules": [{ "protocol": "dns" }, { "port": 53 }],
-        "action": "hijack-dns"
-      },
+      { "protocol": "dns", "action": "hijack-dns" },
       { "ip_is_private": true, "outbound": "直连" },
       { "clash_mode": "direct", "outbound": "直连" },
       { "clash_mode": "global", "outbound": "节点选择" },
