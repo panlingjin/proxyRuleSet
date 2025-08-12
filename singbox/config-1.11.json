@@ -8,22 +8,19 @@
     "servers": [
       {
         "tag": "dns_proxy",
-        "type": "https",
-        "server": "dns.google/dns-query",
+        "address": "https://dns.google/dns-query",
         "address_resolver": "dns_resolver",
         "address_strategy": "ipv4_only",
         "detour": "节点选择"
       },
       {
         "tag": "dns_resolver",
-        "type": "udp",
-        "server": "223.5.5.5",
+        "address": "223.5.5.5",
         "detour": "直连"
       },
       {
         "tag": "dns_direct",
-        "type": "udp",
-        "server": "192.168.6.20",
+        "address": "192.168.6.20",
         "detour": "直连"
       }
     ],
@@ -35,7 +32,7 @@
       { "rule_set": ["geosite-geolocation-!cn", "source-proxy"], "server": "dns_proxy" }
     ],
     "final": "dns_proxy",
-    "strategy": "prefer_ipv4",
+    "strategy": "ipv4_only",
     "independent_cache": true
   },
   "endpoints": [],
@@ -62,114 +59,38 @@
     {
       "tag": "节点选择",
       "type": "selector",
-      "outbounds": [
-        "香港自动",
-        "香港手动",
-        "新加坡自动",
-        "新加坡手动",
-        "日本节点",
-        "台湾节点",
-        "美国节点",
-        "手动切换",
-        "直连"
-      ]
+      "outbounds": ["香港自动", "香港手动", "新加坡自动", "新加坡手动", "日本节点", "台湾节点", "美国节点", "手动切换", "直连"]
     },
     {
       "tag": "YouTube",
       "type": "selector",
-      "outbounds": [
-        "香港自动",
-        "香港手动",
-        "节点选择",
-        "新加坡自动",
-        "新加坡手动",
-        "日本节点",
-        "台湾节点",
-        "美国节点",
-        "手动切换",
-        "直连"
-      ]
+      "outbounds": ["香港自动", "香港手动", "节点选择", "新加坡自动", "新加坡手动", "日本节点", "台湾节点", "美国节点", "手动切换", "直连"]
     },
     {
       "tag": "AI",
       "type": "selector",
-      "outbounds": [
-        "日本节点",
-        "节点选择",
-        "香港自动",
-        "香港手动",
-        "新加坡自动",
-        "新加坡手动",
-        "台湾节点",
-        "美国节点",
-        "手动切换",
-        "直连"
-      ]
+      "outbounds": ["日本节点", "节点选择", "香港自动", "香港手动", "新加坡自动", "新加坡手动", "台湾节点", "美国节点", "手动切换", "直连"]
     },
 
     {
       "tag": "Netflix",
       "type": "selector",
-      "outbounds": [
-        "新加坡手动",
-        "新加坡自动",
-        "节点选择",
-        "香港自动",
-        "香港手动",
-        "日本节点",
-        "台湾节点",
-        "美国节点",
-        "手动切换",
-        "直连"
-      ]
+      "outbounds": ["新加坡手动", "新加坡自动", "节点选择", "香港自动", "香港手动", "日本节点", "台湾节点", "美国节点", "手动切换", "直连"]
     },
     {
       "tag": "Disney",
       "type": "selector",
-      "outbounds": [
-        "香港手动",
-        "香港自动",
-        "节点选择",
-        "新加坡自动",
-        "新加坡手动",
-        "日本节点",
-        "台湾节点",
-        "美国节点",
-        "手动切换",
-        "直连"
-      ]
+      "outbounds": ["香港手动", "香港自动", "节点选择", "新加坡自动", "新加坡手动", "日本节点", "台湾节点", "美国节点", "手动切换", "直连"]
     },
     {
       "tag": "Telegram",
       "type": "selector",
-      "outbounds": [
-        "香港自动",
-        "香港手动",
-        "节点选择",
-        "新加坡自动",
-        "新加坡手动",
-        "日本节点",
-        "台湾节点",
-        "美国节点",
-        "手动切换",
-        "直连"
-      ]
+      "outbounds": ["香港自动", "香港手动", "节点选择", "新加坡自动", "新加坡手动", "日本节点", "台湾节点", "美国节点", "手动切换", "直连"]
     },
     {
       "tag": "Twitter",
       "type": "selector",
-      "outbounds": [
-        "香港自动",
-        "香港手动",
-        "节点选择",
-        "新加坡自动",
-        "新加坡手动",
-        "日本节点",
-        "台湾节点",
-        "美国节点",
-        "手动切换",
-        "直连"
-      ]
+      "outbounds": ["香港自动", "香港手动", "节点选择", "新加坡自动", "新加坡手动", "日本节点", "台湾节点", "美国节点", "手动切换", "直连"]
     },
     {
       "tag": "守候影院",
@@ -189,18 +110,7 @@
     {
       "tag": "Speedtest",
       "type": "selector",
-      "outbounds": [
-        "直连",
-        "节点选择",
-        "香港自动",
-        "香港手动",
-        "新加坡自动",
-        "新加坡手动",
-        "日本节点",
-        "台湾节点",
-        "美国节点",
-        "手动切换"
-      ]
+      "outbounds": ["直连", "节点选择", "香港自动", "香港手动", "新加坡自动", "新加坡手动", "日本节点", "台湾节点", "美国节点", "手动切换"]
     },
     {
       "tag": "Microsoft",
@@ -528,16 +438,7 @@
         "type": "inline",
         "rules": [
           {
-            "domain_suffix": [
-              "qichiyu.com",
-              "codeium.com",
-              "tgstat.com",
-              "metacubex.one",
-              "movie-pilot.org",
-              "home-assistant.io",
-              "alist.nn.ci",
-              "trakt.tv"
-            ]
+            "domain_suffix": ["qichiyu.com", "codeium.com", "tgstat.com", "metacubex.one", "movie-pilot.org", "home-assistant.io", "alist.nn.ci", "trakt.tv"]
           }
         ]
       },
