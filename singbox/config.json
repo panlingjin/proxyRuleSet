@@ -440,7 +440,7 @@
         "type": "inline",
         "rules": [
           {
-            "domain_suffix": ["qichiyu.com", "codeium.com", "tgstat.com", "metacubex.one", "movie-pilot.org", "home-assistant.io", "alist.nn.ci", "trakt.tv"]
+            "domain_suffix": ["qichiyu.com", "codeium.com", "tgstat.com", "metacubex.one", "movie-pilot.org", "home-assistant.io", "alist.nn.ci", "trakt.tv", "proxmox.com"]
           }
         ]
       },
