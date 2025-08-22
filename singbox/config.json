@@ -459,14 +459,13 @@
   "experimental": {
     "clash_api": {
       "external_controller": "0.0.0.0:9090",
-      "external_ui": "/etc/sing-box/ui",
+      "external_ui": "ui",
       "external_ui_download_url": "https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip",
       "secret": "",
       "external_ui_download_detour": "节点选择"
     },
     "cache_file": {
       "enabled": true,
-      "path": "/var/lib/sing-box/cache.db",
       "store_fakeip": false
     }
   }
