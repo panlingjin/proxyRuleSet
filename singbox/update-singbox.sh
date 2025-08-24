@@ -16,7 +16,7 @@ handle_error() {
 
 # 步骤1: 下载文件
 echo "正在下载配置文件..."
-if ! wget -q "$DOWNLOAD_URL" -O "$TEMP_FILE"; then
+if ! wget -q --timeout=30 --tries=2 "$DOWNLOAD_URL" -O "$TEMP_FILE"; then
     handle_error "文件下载失败！请检查URL和网络连接。"
 fi
 
