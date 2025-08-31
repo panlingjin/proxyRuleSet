@@ -27,11 +27,12 @@
     "rules": [
       { "clash_mode": "direct", "server": "dns_direct" },
       { "clash_mode": "global", "server": "dns_proxy" },
+      { "query_type": "HTTPS", "action": "reject" },
       { "rule_set": ["geosite-cn", "source-direct"], "server": "dns_direct" },
       { "rule_set": ["geosite-geolocation-!cn", "source-proxy"], "server": "dns_proxy", "strategy": "ipv4_only" }
     ],
     "final": "dns_proxy",
-    "strategy": "prefer_ipv4",
+    "strategy": "ipv4_only",
     "independent_cache": true
   },
   "endpoints": [],
