@@ -45,10 +45,10 @@ echo "清理临时文件..."
 rm -f "$TEMP_FILE"
 
 
-# 步骤3: 重启服务
-echo "重启服务 $SERVICE_NAME..."
-if ! systemctl restart "$SERVICE_NAME"; then
-    handle_error "服务重启失败！请使用 journalctl -u $SERVICE_NAME 查看日志"
+# 步骤3: 重载服务
+echo "重载服务 $SERVICE_NAME..."
+if ! systemctl reload "$SERVICE_NAME"; then
+    handle_error "服务重载失败！请使用 journalctl -u $SERVICE_NAME 查看日志"
 fi
 
 echo "所有操作已完成！"
