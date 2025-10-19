@@ -95,7 +95,7 @@
     {
       "tag": "守候影院",
       "type": "selector",
-      "outbounds": ["{all}"]
+      "outbounds": ["{all}", "直连"]
     },
     {
       "tag": "游戏平台",
