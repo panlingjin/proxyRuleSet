@@ -441,7 +441,7 @@
         "type": "inline",
         "rules": [
           {
-            "domain_suffix": ["qichiyu.com", "codeium.com", "tgstat.com", "metacubex.one", "movie-pilot.org", "home-assistant.io", "trakt.tv", "proxmox.com"],
+            "domain_suffix": ["qichiyu.com", "codeium.com", "tgstat.com", "metacubex.one", "movie-pilot.org", "home-assistant.io", "trakt.tv", "proxmox.com", "static.trafficjunky.com"],
             "source_ip_cidr": ["5.28.195.2"]
           }
         ]
