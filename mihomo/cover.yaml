@@ -45,10 +45,6 @@ proxy-groups:
     <<: *pr
     icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Steam.png"
 
-  - name: Microsoft
-    <<: *pr
-    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Microsoft.png"
-
   - name: Spotify
     <<: *pr
     icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Spotify.png"
@@ -118,7 +114,6 @@ rules:
   - RULE-SET,ai_domain,Ai
   - RULE-SET,youtube_domain,YouTube
   - RULE-SET,google_domain,Google
-  - RULE-SET,microsoft_domain,Microsoft
   - RULE-SET,telegram_domain,Telegram
   - RULE-SET,twitter_domain,节点选择
   - RULE-SET,epic_domain,游戏平台
@@ -170,9 +165,6 @@ rule-providers:
   github_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
-  microsoft_domain:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
   speedtest_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/speedtest.mrs"
