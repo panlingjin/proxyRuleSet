@@ -29,7 +29,11 @@
       { "clash_mode": "global", "server": "dns_proxy" },
       { "query_type": "HTTPS", "action": "reject" },
       { "rule_set": ["geosite-cn", "source-direct"], "server": "dns_direct" },
-      { "rule_set": ["geosite-geolocation-!cn", "source-proxy"], "server": "dns_proxy", "strategy": "ipv4_only" }
+      {
+        "rule_set": ["geosite-geolocation-!cn", "source-proxy"],
+        "server": "dns_proxy",
+        "strategy": "ipv4_only"
+      }
     ],
     "final": "dns_proxy",
     "strategy": "ipv4_only",
@@ -59,38 +63,114 @@
     {
       "tag": "节点选择",
       "type": "selector",
-      "outbounds": ["香港自动", "香港手动", "新加坡自动", "新加坡手动", "日本节点", "台湾节点", "美国节点", "手动切换", "直连"]
+      "outbounds": [
+        "香港自动",
+        "香港手动",
+        "新加坡自动",
+        "新加坡手动",
+        "日本节点",
+        "台湾节点",
+        "美国节点",
+        "手动切换",
+        "直连"
+      ]
     },
     {
       "tag": "YouTube",
       "type": "selector",
-      "outbounds": ["香港自动", "香港手动", "节点选择", "新加坡自动", "新加坡手动", "日本节点", "台湾节点", "美国节点", "手动切换", "直连"]
+      "outbounds": [
+        "香港自动",
+        "香港手动",
+        "节点选择",
+        "新加坡自动",
+        "新加坡手动",
+        "日本节点",
+        "台湾节点",
+        "美国节点",
+        "手动切换",
+        "直连"
+      ]
     },
     {
       "tag": "AI",
       "type": "selector",
-      "outbounds": ["日本节点", "节点选择", "香港自动", "香港手动", "新加坡自动", "新加坡手动", "台湾节点", "美国节点", "手动切换", "直连"]
+      "outbounds": [
+        "日本节点",
+        "节点选择",
+        "香港自动",
+        "香港手动",
+        "新加坡自动",
+        "新加坡手动",
+        "台湾节点",
+        "美国节点",
+        "手动切换",
+        "直连"
+      ]
     },
 
     {
       "tag": "Netflix",
       "type": "selector",
-      "outbounds": ["新加坡手动", "新加坡自动", "节点选择", "香港自动", "香港手动", "日本节点", "台湾节点", "美国节点", "手动切换", "直连"]
+      "outbounds": [
+        "新加坡手动",
+        "新加坡自动",
+        "节点选择",
+        "香港自动",
+        "香港手动",
+        "日本节点",
+        "台湾节点",
+        "美国节点",
+        "手动切换",
+        "直连"
+      ]
     },
     {
       "tag": "Disney",
       "type": "selector",
-      "outbounds": ["香港手动", "香港自动", "节点选择", "新加坡自动", "新加坡手动", "日本节点", "台湾节点", "美国节点", "手动切换", "直连"]
+      "outbounds": [
+        "香港手动",
+        "香港自动",
+        "节点选择",
+        "新加坡自动",
+        "新加坡手动",
+        "日本节点",
+        "台湾节点",
+        "美国节点",
+        "手动切换",
+        "直连"
+      ]
     },
     {
       "tag": "Telegram",
       "type": "selector",
-      "outbounds": ["香港自动", "香港手动", "节点选择", "新加坡自动", "新加坡手动", "日本节点", "台湾节点", "美国节点", "手动切换", "直连"]
+      "outbounds": [
+        "香港自动",
+        "香港手动",
+        "节点选择",
+        "新加坡自动",
+        "新加坡手动",
+        "日本节点",
+        "台湾节点",
+        "美国节点",
+        "手动切换",
+        "直连"
+      ]
     },
     {
       "tag": "Twitter",
       "type": "selector",
-      "outbounds": ["香港自动", "香港手动", "节点选择", "新加坡自动", "新加坡手动", "日本节点", "台湾节点", "美国节点", "手动切换", "直连"]
+      "outbounds": [
+        "香港自动",
+        "香港手动",
+        "节点选择",
+        "新加坡自动",
+        "新加坡手动",
+        "日本节点",
+        "台湾节点",
+        "美国节点",
+        "手动切换",
+        "直连"
+      ]
     },
     {
       "tag": "守候影院",
@@ -110,7 +190,18 @@
     {
       "tag": "Speedtest",
       "type": "selector",
-      "outbounds": ["直连", "节点选择", "香港自动", "香港手动", "新加坡自动", "新加坡手动", "日本节点", "台湾节点", "美国节点", "手动切换"]
+      "outbounds": [
+        "直连",
+        "节点选择",
+        "香港自动",
+        "香港手动",
+        "新加坡自动",
+        "新加坡手动",
+        "日本节点",
+        "台湾节点",
+        "美国节点",
+        "手动切换"
+      ]
     },
     {
       "tag": "Microsoft",
@@ -138,7 +229,9 @@
       "tag": "香港手动",
       "type": "selector",
       "outbounds": ["{all}"],
-      "filter": [{ "action": "include", "keywords": ["🇭🇰|HK|hk|香港|港|HongKong"] }]
+      "filter": [
+        { "action": "include", "keywords": ["🇭🇰|HK|hk|香港|港|HongKong"] }
+      ]
     },
     {
       "tag": "新加坡自动",
@@ -156,13 +249,17 @@
       "tag": "新加坡手动",
       "type": "selector",
       "outbounds": ["{all}"],
-      "filter": [{ "action": "include", "keywords": ["🇸🇬|SG|sg|新加坡|狮|Singapore"] }]
+      "filter": [
+        { "action": "include", "keywords": ["🇸🇬|SG|sg|新加坡|狮|Singapore"] }
+      ]
     },
     {
       "tag": "日本节点",
       "type": "urltest",
       "outbounds": ["{all}"],
-      "filter": [{ "action": "include", "keywords": ["🇯🇵|JP|jp|日本|日|Japan"] }],
+      "filter": [
+        { "action": "include", "keywords": ["🇯🇵|JP|jp|日本|日|Japan"] }
+      ],
       "url": "http://www.gstatic.com/generate_204",
       "interval": "10m",
       "tolerance": 50
@@ -171,7 +268,9 @@
       "tag": "台湾节点",
       "type": "urltest",
       "outbounds": ["{all}"],
-      "filter": [{ "action": "include", "keywords": ["🇹🇼|TW|tw|台湾|臺灣|台|Taiwan"] }],
+      "filter": [
+        { "action": "include", "keywords": ["🇹🇼|TW|tw|台湾|臺灣|台|Taiwan"] }
+      ],
       "url": "http://www.gstatic.com/generate_204",
       "interval": "10m",
       "tolerance": 50
@@ -180,7 +279,9 @@
       "tag": "美国节点",
       "type": "urltest",
       "outbounds": ["{all}"],
-      "filter": [{ "action": "include", "keywords": ["🇺🇸|US|us|美国|美|United States"] }],
+      "filter": [
+        { "action": "include", "keywords": ["🇺🇸|US|us|美国|美|United States"] }
+      ],
       "url": "http://www.gstatic.com/generate_204",
       "interval": "10m",
       "tolerance": 50
@@ -251,7 +352,7 @@
         "tag": "geosite-chat",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-chat-!cn.srs",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-!cn.srs",
         "download_detour": "节点选择"
       },
       {
@@ -416,7 +517,7 @@
           {
             "domain_suffix": [
               "tslsmart.com",
-              "panlingjin.xyz",
+              "panlingjin.top",
               "sonos.com",
               "statsig.com",
               "getkoala.com",
@@ -441,7 +542,17 @@
         "type": "inline",
         "rules": [
           {
-            "domain_suffix": ["qichiyu.com", "codeium.com", "tgstat.com", "metacubex.one", "movie-pilot.org", "home-assistant.io", "trakt.tv", "proxmox.com", "static.trafficjunky.com"],
+            "domain_suffix": [
+              "qichiyu.com",
+              "codeium.com",
+              "tgstat.com",
+              "metacubex.one",
+              "movie-pilot.org",
+              "home-assistant.io",
+              "trakt.tv",
+              "proxmox.com",
+              "static.trafficjunky.com"
+            ],
             "source_ip_cidr": ["5.28.195.2"]
           }
         ]

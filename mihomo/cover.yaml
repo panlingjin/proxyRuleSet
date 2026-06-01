@@ -144,9 +144,6 @@ rule-providers:
   proxylite:
     <<: *class
     url: "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/ProxyLite.list"
-  #  shouhou:
-  #    <<: *class
-  #    url: "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/Shouhou.list"
   apple_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
