@@ -33,10 +33,6 @@ proxy-groups:
     <<: *pr
     icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Google.png"
 
-  - name: GPT
-    <<: *pr
-    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/ChatGPT.png"
-
   - name: Ai
     <<: *pr
     icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/AI.png"
@@ -110,7 +106,6 @@ rules:
   - RULE-SET,apple_domain,DIRECT
   - RULE-SET,proxylite,节点选择
   - RULE-SET,github_domain,节点选择
-  - RULE-SET,openai_domain,GPT
   - RULE-SET,ai_domain,Ai
   - RULE-SET,youtube_domain,YouTube
   - RULE-SET,google_domain,Google
@@ -147,9 +142,6 @@ rule-providers:
   apple_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
-  openai_domain:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs"
   ai_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs"
