@@ -35,7 +35,7 @@
         "strategy": "ipv4_only"
       }
     ],
-    "final": "dns_proxy",
+    "final": "dns_direct",
     "strategy": "ipv4_only",
     "independent_cache": true
   },
@@ -95,8 +95,8 @@
       "tag": "AI",
       "type": "selector",
       "outbounds": [
-        "美国节点",
         "日本节点",
+        "美国节点",
         "节点选择",
         "香港自动",
         "香港手动",
@@ -202,11 +202,6 @@
         "美国节点",
         "手动切换"
       ]
-    },
-    {
-      "tag": "Microsoft",
-      "type": "selector",
-      "outbounds": ["直连", "香港自动", "香港手动"]
     },
     {
       "tag": "漏网之鱼",
@@ -330,7 +325,6 @@
         "rule_set": ["geosite-disney"],
         "outbound": "Disney"
       },
-      { "rule_set": "geosite-microsoft", "outbound": "Microsoft" },
       {
         "rule_set": ["geosite-steam", "geosite-epicgames"],
         "outbound": "游戏平台"
@@ -426,13 +420,6 @@
         "download_detour": "节点选择"
       },
       {
-        "tag": "geosite-microsoft",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/microsoft.srs",
-        "download_detour": "节点选择"
-      },
-      {
         "tag": "geosite-spotify",
         "type": "remote",
         "format": "binary",
@@ -524,16 +511,13 @@
               "koala.live",
               "nvidia.com",
               "ptvicomo.net",
-              "hdpt.xyz",
               "ptcafe.club",
-              "icc2022.com",
               "ptlover.cc",
               "bugutv.vip",
               "sewerpt.com",
               "123in.link",
               "123panfx.com"
-            ],
-            "domain": ["pt.cdfile.org"]
+            ]
           }
         ]
       },
@@ -553,7 +537,7 @@
               "proxmox.com",
               "static.trafficjunky.com"
             ],
-            "source_ip_cidr": ["5.28.195.2"]
+            "ip_cidr": ["5.28.195.2"]
           }
         ]
       },
