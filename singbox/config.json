@@ -536,7 +536,8 @@
               "home-assistant.io",
               "trakt.tv",
               "proxmox.com",
-              "static.trafficjunky.com"
+              "static.trafficjunky.com",
+              "sntp.uk"
             ],
             "ip_cidr": ["5.28.195.2"]
           }
