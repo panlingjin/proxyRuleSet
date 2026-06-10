@@ -107,6 +107,7 @@ rules:
   - RULE-SET,proxylite,节点选择
   - RULE-SET,github_domain,节点选择
   - RULE-SET,ai_domain,Ai
+  - RULE-SET,transit,Ai
   - RULE-SET,youtube_domain,YouTube
   - RULE-SET,google_domain,Google
   - RULE-SET,telegram_domain,Telegram
@@ -139,6 +140,9 @@ rule-providers:
   proxylite:
     <<: *class
     url: "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/ProxyLite.list"
+  transit:
+    <<: *class
+    url: "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/Transit.list"
   apple_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
