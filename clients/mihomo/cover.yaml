@@ -136,13 +136,13 @@ rule-providers:
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
   direct_domain:
     <<: *class
-    url: "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/Direct.list"
+    url: "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/rules/direct.list"
   proxylite:
     <<: *class
-    url: "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/ProxyLite.list"
+    url: "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/rules/proxy-lite.list"
   transit:
     <<: *class
-    url: "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/Transit.list"
+    url: "https://raw.githubusercontent.com/panlingjin/proxyRuleSet/refs/heads/main/rules/transit.list"
   apple_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"

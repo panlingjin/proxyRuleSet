@@ -1,0 +1,31 @@
+# 直连补充列表(国内域名不解析时，防止走代理使用)
+
+# MyList
+# 域名后缀匹配
+DOMAIN-SUFFIX,tslsmart.com
+DOMAIN-SUFFIX,tsl.x
+DOMAIN-SUFFIX,panlingjin.xyz
+DOMAIN-SUFFIX,sonos.com
+DOMAIN-SUFFIX,statsig.com
+DOMAIN-SUFFIX,getkoala.com
+DOMAIN-SUFFIX,koala.live
+DOMAIN-SUFFIX,nvidia.com
+DOMAIN-SUFFIX,iconify.design
+DOMAIN-SUFFIX,array2026.com
+
+# PT站点
+DOMAIN-SUFFIX,ptvicomo.net
+DOMAIN-SUFFIX,hdpt.xyz
+DOMAIN-SUFFIX,ptcafe.club
+DOMAIN-SUFFIX,icc2022.com
+DOMAIN-SUFFIX,ptlover.cc
+DOMAIN-SUFFIX,bugutv.vip
+DOMAIN-SUFFIX,sewerpt.com
+
+# 域名匹配
+DOMAIN,pt.cdfile.org
+DOMAIN,dnschecker.org
+
+# 123网盘相关
+DOMAIN-SUFFIX,123in.link
+DOMAIN-SUFFIX,123panfx.com

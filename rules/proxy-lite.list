@@ -1,0 +1,30 @@
+# 代理补充列表
+
+# 域名后缀匹配
+DOMAIN-SUFFIX,qichiyu.com
+DOMAIN-SUFFIX,codeium.com
+DOMAIN-SUFFIX,tgstat.com
+DOMAIN-SUFFIX,metacubex.one
+DOMAIN-SUFFIX,movie-pilot.org
+DOMAIN-SUFFIX,ghbtns.com
+DOMAIN-SUFFIX,syncthing.net
+DOMAIN-SUFFIX,home-assistant.io
+DOMAIN-SUFFIX,alist.nn.ci
+DOMAIN-SUFFIX,sntp.uk
+
+
+# 国外DNS
+DOMAIN-SUFFIX,dns.google
+DOMAIN-SUFFIX,dot.sb
+DOMAIN-SUFFIX,dns.umbrella.com
+DOMAIN-SUFFIX,dns.quad9.net
+DOMAIN-SUFFIX,cloudflare.com
+DOMAIN-SUFFIX,doh.opendns.com
+DOMAIN-SUFFIX,hk-hkg.doh.sb
+IP-CIDR,8.8.8.8/32,no-resolve
+IP-CIDR,8.8.4.4/32,no-resolve
+IP-CIDR,1.1.1.1/32,no-resolve
+IP-CIDR,1.0.0.1/32,no-resolve
+IP-CIDR,185.222.222.222/32,no-resolve
+IP-CIDR,208.67.222.222/32,no-resolve
+IP-CIDR,208.67.220.220/32,no-resolve
