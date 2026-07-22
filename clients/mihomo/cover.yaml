@@ -14,11 +14,6 @@ pr:
       ],
   }
 
-dns:
-  nameserver-policy:
-    "+.tslsmart.com": "10.16.202.1"
-    "+.tsl.x": "10.16.202.1"
-
 proxy-groups:
   - name: 节点选择
     type: select
