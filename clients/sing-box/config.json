@@ -178,11 +178,6 @@
       "outbounds": ["{all}", "直连"]
     },
     {
-      "tag": "直播",
-      "type": "selector",
-      "outbounds": ["{all}", "直连"]
-    },
-    {
       "tag": "游戏平台",
       "type": "selector",
       "outbounds": ["直连", "香港自动", "香港手动"]
@@ -306,7 +301,6 @@
       { "rule_set": "source-direct", "outbound": "直连" },
       { "rule_set": "source-proxy", "outbound": "节点选择" },
       { "rule_set": "source-shouhou", "outbound": "守候影院" },
-      { "rule_set": "garysclub", "outbound": "直播" },
       { "rule_set": ["geosite-apple", "geoip-apple"], "outbound": "直连" },
       { "rule_set": "geosite-youtube", "outbound": "YouTube" },
       { "rule_set": ["geosite-ai", "source-transit"], "outbound": "AI" },
