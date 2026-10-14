@@ -16,19 +16,15 @@ pr:
 
 # DNS 覆写：其余 DNS 参数继承原配置。
 dns:
+  fake-ip-filter-mode: blacklist
   fake-ip-filter:
     - "localhost"
     - "+.lan"
     - "+.local"
     - "+.arpa"
-    # Antigravity 的 OAuth 回调和账号初始化不兼容 Fake-IP。
-    - "+.antigravity.google"
-    - "+.antigravity-unleash.goog"
-    - "antigravity.googleapis.com"
-    - "antigravity-pa.googleapis.com"
-    - "cloudcode-pa.googleapis.com"
-    - "daily-cloudcode-pa.googleapis.com"
-    - "managedprojects.googleapis.com"
+    # Google AI 服务（含 Antigravity）使用真实 IP。
+    - "rule-set:google_ai_domain"
+    # Google 登录与 OAuth 相关域名。
     - "accounts.google.com"
     - "oauth2.googleapis.com"
     - "openidconnect.googleapis.com"
@@ -81,10 +77,6 @@ proxy-groups:
   - name: Spotify
     <<: *pr
     icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Spotify.png"
-
-  - name: Speedtest
-    <<: *pr
-    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/SpeedTest.png"
 
   - name: 漏网之鱼
     <<: *pr
@@ -146,6 +138,7 @@ rules:
   # 明确的服务规则
   - RULE-SET,apple_domain,DIRECT
   - RULE-SET,github_domain,节点选择
+  - RULE-SET,google_ai_domain,Google
   - RULE-SET,ai_domain,Ai
   - RULE-SET,transit,Ai
   - RULE-SET,youtube_domain,YouTube
@@ -155,14 +148,13 @@ rules:
   - RULE-SET,epic_domain,游戏平台
   - RULE-SET,steam_domain,游戏平台
   - RULE-SET,spotify_domain,Spotify
-  - RULE-SET,speedtest_domain,Speedtest
 
   # 国内、国外域名兜底
   - RULE-SET,cn_domain,DIRECT
   - RULE-SET,geolocation-!cn,节点选择
 
   # IP 规则兜底
-  - RULE-SET,google_ip,节点选择,no-resolve
+  - RULE-SET,google_ip,Google,no-resolve
   - RULE-SET,telegram_ip,Telegram,no-resolve
   - RULE-SET,twitter_ip,节点选择,no-resolve
   - RULE-SET,cn_ip,DIRECT
@@ -189,6 +181,9 @@ rule-providers:
   apple_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
+  google_ai_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google-gemini.mrs"
   ai_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs"
@@ -201,9 +196,6 @@ rule-providers:
   github_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
-  speedtest_domain:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/speedtest.mrs"
   youtube_domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
