@@ -28,16 +28,16 @@
       { "clash_mode": "direct", "server": "dns_direct" },
       { "clash_mode": "global", "server": "dns_proxy" },
       { "query_type": "HTTPS", "action": "reject" },
-      { "rule_set": ["geosite-cn", "source-direct"], "server": "dns_direct" },
+      { "rule_set": "source-direct", "server": "dns_direct" },
       {
-        "rule_set": ["geosite-geolocation-!cn", "source-proxy"],
-        "server": "dns_proxy",
-        "strategy": "ipv4_only"
-      }
+        "rule_set": ["source-proxy", "source-transit"],
+        "server": "dns_proxy"
+      },
+      { "rule_set": "geosite-cn", "server": "dns_direct" },
+      { "rule_set": "geosite-geolocation-!cn", "server": "dns_proxy" }
     ],
     "final": "dns_direct",
-    "strategy": "ipv4_only",
-    "independent_cache": true
+    "strategy": "ipv4_only"
   },
   "endpoints": [],
   "inbounds": [
@@ -48,6 +48,7 @@
       "address": ["172.18.0.1/30", "fdfe:dcba:9876::1/126"],
       "mtu": 9000,
       "auto_route": true,
+      "dns_mode": "hijack",
       "auto_redirect": true,
       "strict_route": true,
       "stack": "mixed"
@@ -216,8 +217,8 @@
         { "action": "include", "keywords": ["🇭🇰|HK|hk|香港|港|HongKong"] },
         { "action": "exclude", "keywords": ["2.00x"] }
       ],
-      "url": "http://www.gstatic.com/generate_204",
-      "interval": "10m",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
       "tolerance": 50
     },
     {
@@ -236,8 +237,8 @@
         { "action": "include", "keywords": ["🇸🇬|SG|sg|新加坡|狮|Singapore"] },
         { "action": "exclude", "keywords": ["2.00x"] }
       ],
-      "url": "http://www.gstatic.com/generate_204",
-      "interval": "10m",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
       "tolerance": 50
     },
     {
@@ -255,8 +256,8 @@
       "filter": [
         { "action": "include", "keywords": ["🇯🇵|JP|jp|日本|日|Japan"] }
       ],
-      "url": "http://www.gstatic.com/generate_204",
-      "interval": "10m",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
       "tolerance": 50
     },
     {
@@ -266,8 +267,8 @@
       "filter": [
         { "action": "include", "keywords": ["🇹🇼|TW|tw|台湾|臺灣|台|Taiwan"] }
       ],
-      "url": "http://www.gstatic.com/generate_204",
-      "interval": "10m",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
       "tolerance": 50
     },
     {
@@ -277,8 +278,8 @@
       "filter": [
         { "action": "include", "keywords": ["🇺🇸|US|us|美国|美|United States"] }
       ],
-      "url": "http://www.gstatic.com/generate_204",
-      "interval": "10m",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
       "tolerance": 50
     },
     { "tag": "手动切换", "type": "selector", "outbounds": ["{all}"] },
@@ -296,7 +297,7 @@
       { "protocol": "dns", "action": "hijack-dns" },
       { "ip_is_private": true, "outbound": "直连" },
       { "clash_mode": "direct", "outbound": "直连" },
-      { "clash_mode": "global", "outbound": "节点选择" },
+      { "clash_mode": "global", "outbound": "GLOBAL" },
       { "rule_set": "geosite-private", "outbound": "直连" },
       { "rule_set": "source-direct", "outbound": "直连" },
       { "rule_set": "source-proxy", "outbound": "节点选择" },
@@ -549,8 +550,7 @@
         "type": "inline",
         "rules": [
           {
-            "domain_suffix": ["cn2gias.uk"],
-            "domain": ["emby.cn2gias.uk"]
+            "domain_suffix": ["cn2gias.uk"]
           }
         ]
       },
@@ -562,20 +562,25 @@
             "domain_suffix": ["packyapi.com"]
           }
         ]
-      },
-      {
-        "tag": "garysclub",
-        "type": "inline",
-        "rules": [
-          {
-            "domain_keyword": [
-              "garysclub"
-            ]
-          }
-        ]
       }
     ]
   },
+  "services": [
+    {
+      "type": "api",
+      "tag": "api",
+      "listen": "0.0.0.0",
+      "listen_port": 9091,
+      "secret": "",
+      "dashboard": {
+        "enabled": true,
+        "path": "dashboard",
+        "http_client": {
+          "detour": "节点选择"
+        }
+      }
+    }
+  ],
   "experimental": {
     "clash_api": {
       "external_controller": "0.0.0.0:9090",
