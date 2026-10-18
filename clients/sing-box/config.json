@@ -9,8 +9,7 @@
       {
         "tag": "dns_proxy",
         "type": "https",
-        "server": "dns.google",
-        "domain_resolver": "dns_resolver",
+        "server": "8.8.8.8",
         "detour": "节点选择"
       },
       {
@@ -25,9 +24,9 @@
       }
     ],
     "rules": [
+      { "query_type": "HTTPS", "action": "reject" },
       { "clash_mode": "direct", "server": "dns_direct" },
       { "clash_mode": "global", "server": "dns_proxy" },
-      { "query_type": "HTTPS", "action": "reject" },
       { "rule_set": "source-direct", "server": "dns_direct" },
       {
         "rule_set": ["source-proxy", "source-transit"],
@@ -37,7 +36,8 @@
       { "rule_set": "geosite-geolocation-!cn", "server": "dns_proxy" }
     ],
     "final": "dns_direct",
-    "strategy": "ipv4_only"
+    "strategy": "ipv4_only",
+    "reverse_mapping": true
   },
   "endpoints": [],
   "inbounds": [
@@ -46,12 +46,10 @@
       "tag": "tun-in",
       "interface_name": "tun0",
       "address": ["172.18.0.1/30", "fdfe:dcba:9876::1/126"],
-      "mtu": 9000,
       "auto_route": true,
-      "dns_mode": "hijack",
       "auto_redirect": true,
-      "strict_route": true,
-      "stack": "mixed"
+      "dns_mode": "hijack",
+      "strict_route": true
     },
     {
       "tag": "mixed-in",
@@ -179,11 +177,6 @@
       "outbounds": ["{all}", "直连"]
     },
     {
-      "tag": "游戏平台",
-      "type": "selector",
-      "outbounds": ["直连", "香港自动", "香港手动"]
-    },
-    {
       "tag": "Spotify",
       "type": "selector",
       "outbounds": ["直连", "节点选择", "香港自动", "香港手动"]
@@ -284,51 +277,86 @@
     },
     { "tag": "手动切换", "type": "selector", "outbounds": ["{all}"] },
     { "tag": "GLOBAL", "type": "selector", "outbounds": ["{all}"] },
-    { "tag": "直连", "type": "direct" }
+    { "tag": "直连", "type": "direct", "domain_resolver": "dns_direct" }
+  ],
+  "http_clients": [
+    {
+      "tag": "直连下载",
+      "detour": "直连"
+    }
   ],
   "route": {
     "final": "漏网之鱼",
     "auto_detect_interface": true,
+    "default_http_client": "直连下载",
     "default_domain_resolver": {
-      "server": "dns_direct"
+      "server": "dns_resolver"
     },
     "rules": [
-      { "action": "sniff" },
-      { "protocol": "dns", "action": "hijack-dns" },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          { "port": [53, 853], "invert": true },
+          { "clash_mode": "global", "invert": true },
+          {
+            "type": "logical",
+            "mode": "or",
+            "rules": [
+              { "ip_is_private": true },
+              { "rule_set": "geoip-cn" }
+            ]
+          }
+        ],
+        "action": "bypass"
+      },
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          { "domain_suffix": "push.apple.com" },
+          { "rule_set": "geoip-telegram" }
+        ],
+        "invert": true,
+        "action": "sniff"
+      },
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [{ "port": 53 }, { "protocol": "dns" }],
+        "action": "hijack-dns"
+      },
       { "ip_is_private": true, "outbound": "直连" },
+      {"type": "logical", "mode": "or", "rules": [{"port": 853}, {"protocol": ["stun", "quic"]}], "action": "reject", "no_drop": true},
       { "clash_mode": "direct", "outbound": "直连" },
       { "clash_mode": "global", "outbound": "GLOBAL" },
       { "rule_set": "geosite-private", "outbound": "直连" },
       { "rule_set": "source-direct", "outbound": "直连" },
       { "rule_set": "source-proxy", "outbound": "节点选择" },
       { "rule_set": "source-shouhou", "outbound": "守候影院" },
-      { "rule_set": ["geosite-apple", "geoip-apple"], "outbound": "直连" },
+      { "rule_set": "geosite-apple", "outbound": "直连" },
       { "rule_set": "geosite-youtube", "outbound": "YouTube" },
       { "rule_set": ["geosite-ai", "source-transit"], "outbound": "AI" },
       {
-        "rule_set": ["geosite-google", "geoip-google"],
+        "rule_set": "geosite-google",
         "outbound": "节点选择"
       },
       { "rule_set": "geosite-github", "outbound": "节点选择" },
       {
-        "rule_set": ["geosite-telegram", "geoip-telegram"],
+        "rule_set": "geosite-telegram",
         "outbound": "Telegram"
       },
       {
-        "rule_set": ["geosite-twitter", "geoip-twitter"],
+        "rule_set": "geosite-twitter",
         "outbound": "Twitter"
       },
       {
-        "rule_set": ["geosite-netflix", "geoip-netflix"],
+        "rule_set": "geosite-netflix",
         "outbound": "Netflix"
       },
       {
         "rule_set": ["geosite-disney"],
         "outbound": "Disney"
-      },
-      {
-        "rule_set": ["geosite-steam", "geosite-epicgames"],
-        "outbound": "游戏平台"
       },
       {
         "rule_set": ["geosite-spotify"],
@@ -339,7 +367,14 @@
         "outbound": "Speedtest"
       },
       { "rule_set": "geosite-geolocation-!cn", "outbound": "节点选择" },
-      { "rule_set": ["geosite-cn", "geoip-cn"], "outbound": "直连" }
+      { "rule_set": "geosite-cn", "outbound": "直连" },
+      { "inbound": "mixed-in", "action": "resolve" },
+      { "rule_set": "geoip-apple", "outbound": "直连" },
+      { "rule_set": "geoip-google", "outbound": "节点选择" },
+      { "rule_set": "geoip-telegram", "outbound": "Telegram" },
+      { "rule_set": "geoip-twitter", "outbound": "Twitter" },
+      { "rule_set": "geoip-netflix", "outbound": "Netflix" },
+      { "rule_set": "geoip-cn", "outbound": "直连" }
     ],
 
     "rule_set": [
@@ -347,156 +382,122 @@
         "tag": "geosite-ai",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-!cn.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ai-!cn.srs"
       },
       {
         "tag": "geosite-youtube",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/youtube.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-youtube.srs"
       },
       {
         "tag": "geosite-google",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/google.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs"
       },
       {
         "tag": "geosite-github",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/github.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-github.srs"
       },
       {
         "tag": "geosite-telegram",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/telegram.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-telegram.srs"
       },
       {
         "tag": "geosite-twitter",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/twitter.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-twitter.srs"
       },
       {
         "tag": "geosite-netflix",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/netflix.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-netflix.srs"
       },
       {
         "tag": "geosite-disney",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/disney.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-disney.srs"
       },
       {
         "tag": "geosite-apple",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/apple.srs",
-        "download_detour": "节点选择"
-      },
-      {
-        "tag": "geosite-epicgames",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/epicgames.srs",
-        "download_detour": "节点选择"
-      },
-      {
-        "tag": "geosite-steam",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/steam.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-apple.srs"
       },
       {
         "tag": "geosite-spotify",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/spotify.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-spotify.srs"
       },
       {
         "tag": "geosite-speedtest",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/speedtest.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-speedtest.srs"
       },
       {
         "tag": "geosite-geolocation-!cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs"
       },
       {
         "tag": "geosite-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/cn.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
       },
       {
         "tag": "geosite-private",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/private.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs"
       },
 
       {
         "tag": "geoip-google",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/google.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/google.srs"
       },
       {
         "tag": "geoip-telegram",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/telegram.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/telegram.srs"
       },
       {
         "tag": "geoip-twitter",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/twitter.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/twitter.srs"
       },
       {
         "tag": "geoip-netflix",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/netflix.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/netflix.srs"
       },
       {
         "tag": "geoip-apple",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geoip/apple.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geoip/apple.srs"
       },
       {
         "tag": "geoip-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs",
-        "download_detour": "节点选择"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
       },
       {
         "tag": "source-direct",
@@ -575,19 +576,18 @@
       "dashboard": {
         "enabled": true,
         "path": "dashboard",
-        "http_client": {
-          "detour": "节点选择"
-        }
+        "download_url": "https://gh-proxy.com/https://github.com/SagerNet/sing-box-dashboard/archive/refs/heads/gh-pages.zip",
+        "http_client": "直连下载"
       }
     }
   ],
   "experimental": {
     "clash_api": {
       "external_controller": "0.0.0.0:9090",
-      "external_ui": "ui",
-      "external_ui_download_url": "https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip",
+      "external_ui": "yacd",
+      "external_ui_download_url": "https://gh-proxy.com/https://github.com/MetaCubeX/Yacd-meta/archive/gh-pages.zip",
       "secret": "",
-      "external_ui_download_detour": "节点选择"
+      "external_ui_download_detour": "直连"
     },
     "cache_file": {
       "enabled": true,
