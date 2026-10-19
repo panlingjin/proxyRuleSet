@@ -1,0 +1,5 @@
+{
+  "name": "airport",
+  "type": "subscription",
+  "outbound": "🕳^(守候影院|手动切换|GLOBAL)$\n🕳^香港自动$🏷ℹ️^(?!.*2\\.00x).*(?:🇭🇰|HK|香港|港|HongKong)\n🕳^香港手动$🏷ℹ️🇭🇰|HK|香港|港|HongKong\n🕳^新加坡自动$🏷ℹ️^(?!.*2\\.00x).*(?:🇸🇬|SG|新加坡|狮|Singapore)\n🕳^新加坡手动$🏷ℹ️🇸🇬|SG|新加坡|狮|Singapore\n🕳^日本自动$🏷ℹ️🇯🇵|JP|日本|日|Japan\n🕳^台湾自动$🏷ℹ️🇹🇼|TW|台湾|臺灣|台|Taiwan\n🕳^美国自动$🏷ℹ️🇺🇸|US|美国|美|United States"
+}

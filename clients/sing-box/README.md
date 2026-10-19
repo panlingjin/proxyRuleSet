@@ -1,10 +1,10 @@
 # sing-box 1.14.3
 
-`config.json` 是订阅转换模板；`{all}` 和 `filter` 需要由转换服务展开，不能直接作为 sing-box 的完整运行配置。
+`config.json` 是唯一的当前模板，使用 Sub-Store 的 xream 脚本生成完整配置。按 [生成完整配置说明](SUB-STORE.md) 设置 `sub-store-arguments.json` 中的参数，并在 xream 之后运行 `sub-store-postprocess.js`。模板不含 `{all}` 和 `filter`；空分组需要填入节点后才能运行。
 
 ## 版本备份
 
-- `config.json`：当前针对 1.14.3 调整的模板。
+- `config.json`：当前针对 1.14.3 的 Sub-Store/xream 模板。
 - `config-1.13.4.json`：本轮升级修改前的原始模板，从 Git 提交 `c7d1556` 恢复并按字节核对一致。
 - `config-1.11.json`：已有的 1.11 版本模板。
 
@@ -34,7 +34,9 @@ DNS 先拒绝 HTTPS 类型查询，再匹配模式规则；规则模式下依次
 
 规则集优先使用 SagerNet 官方仓库：14 个域名分类使用 `SagerNet/sing-geosite` 的 `rule-set` 分支，国内 IP 使用 `SagerNet/sing-geoip` 的 `rule-set` 分支。配置中的标签及引用保持不变，`geosite-ai` 对应官方文件 `geosite-category-ai-!cn.srs`。官方当前没有 `geoip-google`、`geoip-telegram`、`geoip-twitter`、`geoip-netflix`、`geoip-apple`，这 5 项继续使用 MetaCubeX 原来源；自定义内联规则保留。来源切换后同名分类的具体覆盖范围可能不同，部署后应检查常用服务分流。
 
-自动测速 URL 使用 `https://www.gstatic.com/generate_204`，间隔为 `5m`，容差为 `50`。官方未填写间隔时的默认值为 `3m`；需要更频繁更新测速结果时可改为该值。
+当前模板的自动测速组省略 `url`、`interval` 和 `tolerance`，使用 sing-box 默认值：测速 URL 为 `https://www.gstatic.com/generate_204`，间隔为 `3m`，容差为 `50ms`。
+
+自动测速分组统一命名为“香港自动”“新加坡自动”“日本自动”“台湾自动”“美国自动”，分组引用和 xream 筛选参数同步使用这些名称。
 
 ## 路由顺序
 

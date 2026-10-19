@@ -24,16 +24,37 @@
       }
     ],
     "rules": [
-      { "query_type": "HTTPS", "action": "reject" },
-      { "clash_mode": "direct", "server": "dns_direct" },
-      { "clash_mode": "global", "server": "dns_proxy" },
-      { "rule_set": "source-direct", "server": "dns_direct" },
       {
-        "rule_set": ["source-proxy", "source-transit"],
+        "query_type": "HTTPS",
+        "action": "reject"
+      },
+      {
+        "clash_mode": "direct",
+        "server": "dns_direct"
+      },
+      {
+        "clash_mode": "global",
         "server": "dns_proxy"
       },
-      { "rule_set": "geosite-cn", "server": "dns_direct" },
-      { "rule_set": "geosite-geolocation-!cn", "server": "dns_proxy" }
+      {
+        "rule_set": "source-direct",
+        "server": "dns_direct"
+      },
+      {
+        "rule_set": [
+          "source-proxy",
+          "source-transit"
+        ],
+        "server": "dns_proxy"
+      },
+      {
+        "rule_set": "geosite-cn",
+        "server": "dns_direct"
+      },
+      {
+        "rule_set": "geosite-geolocation-!cn",
+        "server": "dns_proxy"
+      }
     ],
     "final": "dns_direct",
     "strategy": "ipv4_only",
@@ -45,7 +66,10 @@
       "type": "tun",
       "tag": "tun-in",
       "interface_name": "tun0",
-      "address": ["172.18.0.1/30", "fdfe:dcba:9876::1/126"],
+      "address": [
+        "172.18.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
       "auto_route": true,
       "auto_redirect": true,
       "dns_mode": "hijack",
@@ -67,9 +91,9 @@
         "香港手动",
         "新加坡自动",
         "新加坡手动",
-        "日本节点",
-        "台湾节点",
-        "美国节点",
+        "日本自动",
+        "台湾自动",
+        "美国自动",
         "手动切换",
         "直连"
       ]
@@ -83,9 +107,9 @@
         "节点选择",
         "新加坡自动",
         "新加坡手动",
-        "日本节点",
-        "台湾节点",
-        "美国节点",
+        "日本自动",
+        "台湾自动",
+        "美国自动",
         "手动切换",
         "直连"
       ]
@@ -94,19 +118,18 @@
       "tag": "AI",
       "type": "selector",
       "outbounds": [
-        "日本节点",
-        "美国节点",
+        "日本自动",
+        "美国自动",
         "节点选择",
         "香港自动",
         "香港手动",
         "新加坡自动",
         "新加坡手动",
-        "台湾节点",
+        "台湾自动",
         "手动切换",
         "直连"
       ]
     },
-
     {
       "tag": "Netflix",
       "type": "selector",
@@ -116,9 +139,9 @@
         "节点选择",
         "香港自动",
         "香港手动",
-        "日本节点",
-        "台湾节点",
-        "美国节点",
+        "日本自动",
+        "台湾自动",
+        "美国自动",
         "手动切换",
         "直连"
       ]
@@ -132,9 +155,9 @@
         "节点选择",
         "新加坡自动",
         "新加坡手动",
-        "日本节点",
-        "台湾节点",
-        "美国节点",
+        "日本自动",
+        "台湾自动",
+        "美国自动",
         "手动切换",
         "直连"
       ]
@@ -148,9 +171,9 @@
         "节点选择",
         "新加坡自动",
         "新加坡手动",
-        "日本节点",
-        "台湾节点",
-        "美国节点",
+        "日本自动",
+        "台湾自动",
+        "美国自动",
         "手动切换",
         "直连"
       ]
@@ -164,9 +187,9 @@
         "节点选择",
         "新加坡自动",
         "新加坡手动",
-        "日本节点",
-        "台湾节点",
-        "美国节点",
+        "日本自动",
+        "台湾自动",
+        "美国自动",
         "手动切换",
         "直连"
       ]
@@ -174,12 +197,19 @@
     {
       "tag": "守候影院",
       "type": "selector",
-      "outbounds": ["{all}", "直连"]
+      "outbounds": [
+        "直连"
+      ]
     },
     {
       "tag": "Spotify",
       "type": "selector",
-      "outbounds": ["直连", "节点选择", "香港自动", "香港手动"]
+      "outbounds": [
+        "直连",
+        "节点选择",
+        "香港自动",
+        "香港手动"
+      ]
     },
     {
       "tag": "Speedtest",
@@ -191,93 +221,71 @@
         "香港手动",
         "新加坡自动",
         "新加坡手动",
-        "日本节点",
-        "台湾节点",
-        "美国节点",
+        "日本自动",
+        "台湾自动",
+        "美国自动",
         "手动切换"
       ]
     },
     {
       "tag": "漏网之鱼",
       "type": "selector",
-      "outbounds": ["直连", "节点选择", "香港手动"]
+      "outbounds": [
+        "直连",
+        "节点选择",
+        "香港手动"
+      ]
     },
     {
       "tag": "香港自动",
       "type": "urltest",
-      "outbounds": ["{all}"],
-      "filter": [
-        { "action": "include", "keywords": ["🇭🇰|HK|hk|香港|港|HongKong"] },
-        { "action": "exclude", "keywords": ["2.00x"] }
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "5m",
-      "tolerance": 50
+      "outbounds": []
     },
     {
       "tag": "香港手动",
       "type": "selector",
-      "outbounds": ["{all}"],
-      "filter": [
-        { "action": "include", "keywords": ["🇭🇰|HK|hk|香港|港|HongKong"] }
-      ]
+      "outbounds": []
     },
     {
       "tag": "新加坡自动",
       "type": "urltest",
-      "outbounds": ["{all}"],
-      "filter": [
-        { "action": "include", "keywords": ["🇸🇬|SG|sg|新加坡|狮|Singapore"] },
-        { "action": "exclude", "keywords": ["2.00x"] }
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "5m",
-      "tolerance": 50
+      "outbounds": []
     },
     {
       "tag": "新加坡手动",
       "type": "selector",
-      "outbounds": ["{all}"],
-      "filter": [
-        { "action": "include", "keywords": ["🇸🇬|SG|sg|新加坡|狮|Singapore"] }
-      ]
+      "outbounds": []
     },
     {
-      "tag": "日本节点",
+      "tag": "日本自动",
       "type": "urltest",
-      "outbounds": ["{all}"],
-      "filter": [
-        { "action": "include", "keywords": ["🇯🇵|JP|jp|日本|日|Japan"] }
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "5m",
-      "tolerance": 50
+      "outbounds": []
     },
     {
-      "tag": "台湾节点",
+      "tag": "台湾自动",
       "type": "urltest",
-      "outbounds": ["{all}"],
-      "filter": [
-        { "action": "include", "keywords": ["🇹🇼|TW|tw|台湾|臺灣|台|Taiwan"] }
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "5m",
-      "tolerance": 50
+      "outbounds": []
     },
     {
-      "tag": "美国节点",
+      "tag": "美国自动",
       "type": "urltest",
-      "outbounds": ["{all}"],
-      "filter": [
-        { "action": "include", "keywords": ["🇺🇸|US|us|美国|美|United States"] }
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "5m",
-      "tolerance": 50
+      "outbounds": []
     },
-    { "tag": "手动切换", "type": "selector", "outbounds": ["{all}"] },
-    { "tag": "GLOBAL", "type": "selector", "outbounds": ["{all}"] },
-    { "tag": "直连", "type": "direct", "domain_resolver": "dns_direct" }
+    {
+      "tag": "手动切换",
+      "type": "selector",
+      "outbounds": []
+    },
+    {
+      "tag": "GLOBAL",
+      "type": "selector",
+      "outbounds": []
+    },
+    {
+      "tag": "直连",
+      "type": "direct",
+      "domain_resolver": "dns_direct"
+    }
   ],
   "http_clients": [
     {
@@ -297,14 +305,27 @@
         "type": "logical",
         "mode": "and",
         "rules": [
-          { "port": [53, 853], "invert": true },
-          { "clash_mode": "global", "invert": true },
+          {
+            "port": [
+              53,
+              853
+            ],
+            "invert": true
+          },
+          {
+            "clash_mode": "global",
+            "invert": true
+          },
           {
             "type": "logical",
             "mode": "or",
             "rules": [
-              { "ip_is_private": true },
-              { "rule_set": "geoip-cn" }
+              {
+                "ip_is_private": true
+              },
+              {
+                "rule_set": "geoip-cn"
+              }
             ]
           }
         ],
@@ -314,8 +335,12 @@
         "type": "logical",
         "mode": "or",
         "rules": [
-          { "domain_suffix": "push.apple.com" },
-          { "rule_set": "geoip-telegram" }
+          {
+            "domain_suffix": "push.apple.com"
+          },
+          {
+            "rule_set": "geoip-telegram"
+          }
         ],
         "invert": true,
         "action": "sniff"
@@ -323,25 +348,84 @@
       {
         "type": "logical",
         "mode": "or",
-        "rules": [{ "port": 53 }, { "protocol": "dns" }],
+        "rules": [
+          {
+            "port": 53
+          },
+          {
+            "protocol": "dns"
+          }
+        ],
         "action": "hijack-dns"
       },
-      { "ip_is_private": true, "outbound": "直连" },
-      {"type": "logical", "mode": "or", "rules": [{"port": 853}, {"protocol": ["stun", "quic"]}], "action": "reject", "no_drop": true},
-      { "clash_mode": "direct", "outbound": "直连" },
-      { "clash_mode": "global", "outbound": "GLOBAL" },
-      { "rule_set": "geosite-private", "outbound": "直连" },
-      { "rule_set": "source-direct", "outbound": "直连" },
-      { "rule_set": "source-proxy", "outbound": "节点选择" },
-      { "rule_set": "source-shouhou", "outbound": "守候影院" },
-      { "rule_set": "geosite-apple", "outbound": "直连" },
-      { "rule_set": "geosite-youtube", "outbound": "YouTube" },
-      { "rule_set": ["geosite-ai", "source-transit"], "outbound": "AI" },
+      {
+        "ip_is_private": true,
+        "outbound": "直连"
+      },
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "port": 853
+          },
+          {
+            "protocol": [
+              "stun",
+              "quic"
+            ]
+          }
+        ],
+        "action": "reject",
+        "no_drop": true
+      },
+      {
+        "clash_mode": "direct",
+        "outbound": "直连"
+      },
+      {
+        "clash_mode": "global",
+        "outbound": "GLOBAL"
+      },
+      {
+        "rule_set": "geosite-private",
+        "outbound": "直连"
+      },
+      {
+        "rule_set": "source-direct",
+        "outbound": "直连"
+      },
+      {
+        "rule_set": "source-proxy",
+        "outbound": "节点选择"
+      },
+      {
+        "rule_set": "source-shouhou",
+        "outbound": "守候影院"
+      },
+      {
+        "rule_set": "geosite-apple",
+        "outbound": "直连"
+      },
+      {
+        "rule_set": "geosite-youtube",
+        "outbound": "YouTube"
+      },
+      {
+        "rule_set": [
+          "geosite-ai",
+          "source-transit"
+        ],
+        "outbound": "AI"
+      },
       {
         "rule_set": "geosite-google",
         "outbound": "节点选择"
       },
-      { "rule_set": "geosite-github", "outbound": "节点选择" },
+      {
+        "rule_set": "geosite-github",
+        "outbound": "节点选择"
+      },
       {
         "rule_set": "geosite-telegram",
         "outbound": "Telegram"
@@ -355,28 +439,60 @@
         "outbound": "Netflix"
       },
       {
-        "rule_set": ["geosite-disney"],
+        "rule_set": [
+          "geosite-disney"
+        ],
         "outbound": "Disney"
       },
       {
-        "rule_set": ["geosite-spotify"],
+        "rule_set": [
+          "geosite-spotify"
+        ],
         "outbound": "Spotify"
       },
       {
-        "rule_set": ["geosite-speedtest"],
+        "rule_set": [
+          "geosite-speedtest"
+        ],
         "outbound": "Speedtest"
       },
-      { "rule_set": "geosite-geolocation-!cn", "outbound": "节点选择" },
-      { "rule_set": "geosite-cn", "outbound": "直连" },
-      { "inbound": "mixed-in", "action": "resolve" },
-      { "rule_set": "geoip-apple", "outbound": "直连" },
-      { "rule_set": "geoip-google", "outbound": "节点选择" },
-      { "rule_set": "geoip-telegram", "outbound": "Telegram" },
-      { "rule_set": "geoip-twitter", "outbound": "Twitter" },
-      { "rule_set": "geoip-netflix", "outbound": "Netflix" },
-      { "rule_set": "geoip-cn", "outbound": "直连" }
+      {
+        "rule_set": "geosite-geolocation-!cn",
+        "outbound": "节点选择"
+      },
+      {
+        "rule_set": "geosite-cn",
+        "outbound": "直连"
+      },
+      {
+        "inbound": "mixed-in",
+        "action": "resolve"
+      },
+      {
+        "rule_set": "geoip-apple",
+        "outbound": "直连"
+      },
+      {
+        "rule_set": "geoip-google",
+        "outbound": "节点选择"
+      },
+      {
+        "rule_set": "geoip-telegram",
+        "outbound": "Telegram"
+      },
+      {
+        "rule_set": "geoip-twitter",
+        "outbound": "Twitter"
+      },
+      {
+        "rule_set": "geoip-netflix",
+        "outbound": "Netflix"
+      },
+      {
+        "rule_set": "geoip-cn",
+        "outbound": "直连"
+      }
     ],
-
     "rule_set": [
       {
         "tag": "geosite-ai",
@@ -462,7 +578,6 @@
         "format": "binary",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs"
       },
-
       {
         "tag": "geoip-google",
         "type": "remote",
@@ -506,7 +621,8 @@
           {
             "domain_suffix": [
               "tslsmart.com",
-              "panlingjin.top",
+              "tsl.x",
+              "panlingjin.fun",
               "sonos.com",
               "statsig.com",
               "getkoala.com",
@@ -542,7 +658,9 @@
               "static.trafficjunky.com",
               "sntp.uk"
             ],
-            "ip_cidr": ["5.28.195.2"]
+            "ip_cidr": [
+              "5.28.195.2"
+            ]
           }
         ]
       },
@@ -551,7 +669,9 @@
         "type": "inline",
         "rules": [
           {
-            "domain_suffix": ["cn2gias.uk"]
+            "domain_suffix": [
+              "cn2gias.uk"
+            ]
           }
         ]
       },
@@ -560,7 +680,9 @@
         "type": "inline",
         "rules": [
           {
-            "domain_suffix": ["packyapi.com"]
+            "domain_suffix": [
+              "packyapi.com"
+            ]
           }
         ]
       }
