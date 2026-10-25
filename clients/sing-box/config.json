@@ -656,7 +656,8 @@
               "trakt.tv",
               "proxmox.com",
               "static.trafficjunky.com",
-              "sntp.uk"
+              "sntp.uk",
+              "114514417.xyz"
             ],
             "ip_cidr": [
               "5.28.195.2"
