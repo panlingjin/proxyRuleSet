@@ -657,7 +657,9 @@
               "proxmox.com",
               "static.trafficjunky.com",
               "sntp.uk",
-              "114514417.xyz"
+              "114514417.xyz",
+              "ouonetwork.com",
+              "良心云.com"
             ],
             "ip_cidr": [
               "5.28.195.2"
