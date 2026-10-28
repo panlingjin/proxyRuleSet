@@ -431,10 +431,6 @@
         "outbound": "直连"
       },
       {
-        "rule_set": "geosite-apple",
-        "outbound": "直连"
-      },
-      {
         "rule_set": [
           "geosite-ai",
           "source-transit"
@@ -466,21 +462,15 @@
         "outbound": "Netflix"
       },
       {
-        "rule_set": [
-          "geosite-disney"
-        ],
+        "rule_set": "geosite-disney",
         "outbound": "Disney"
       },
       {
-        "rule_set": [
-          "geosite-spotify"
-        ],
+        "rule_set": "geosite-spotify",
         "outbound": "Spotify"
       },
       {
-        "rule_set": [
-          "geosite-speedtest"
-        ],
+        "rule_set": "geosite-speedtest",
         "outbound": "Speedtest"
       },
       {
@@ -506,10 +496,6 @@
       {
         "rule_set": "geoip-twitter",
         "outbound": "Twitter"
-      },
-      {
-        "rule_set": "geoip-netflix",
-        "outbound": "Netflix"
       },
       {
         "rule_set": "geoip-cn",
@@ -564,12 +550,6 @@
         "type": "remote",
         "format": "binary",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-disney.srs"
-      },
-      {
-        "tag": "geosite-apple",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-apple.srs"
       },
       {
         "tag": "geosite-spotify",
@@ -630,12 +610,6 @@
         "type": "remote",
         "format": "binary",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/twitter.srs"
-      },
-      {
-        "tag": "geoip-netflix",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/netflix.srs"
       },
       {
         "tag": "geoip-apple",
