@@ -22,13 +22,13 @@ Yacd-meta 地址为 `http://Debian地址:9090/ui/`，后端地址为 `http://Deb
 
 ## DNS 与测速
 
-DNS 先拒绝 HTTPS 类型查询，再匹配模式规则；规则模式下依次匹配自定义直连、自定义代理（含 `source-transit`）、国内分类和国外分类，最终使用 `dns_direct`。全局模式的数据流量使用 `GLOBAL` 分组。
+DNS 先拒绝 HTTPS 类型查询，再将 `n-02.nodecon.uk` 和 `n-26-l3.nodecon.uk` 的查询交给 `dns_node`，然后匹配模式规则；规则模式下依次匹配自定义直连、自定义代理（含 `source-transit`）、国内分类和国外分类，最终使用 `dns_proxy`。全局模式的数据流量使用 `GLOBAL` 分组。
 
 启用 `dns.reverse_mapping`，根据经 sing-box 返回的 DNS 响应保存 IP 与域名映射，为后续路由补充域名信息；保留协议嗅探。DNS 劫持规则匹配目标端口 53 或嗅探识别出的 DNS 协议，两者满足任一条件即执行 `hijack-dns`。
 
 `dns_direct` 指向局域网 AdGuard Home；`dns_proxy` 经“节点选择”查询 Google DoH，不经过 AdGuard Home。保留 sing-box 默认内存 DNS 缓存，不启用 DNS 缓存持久化 `store_dns` 或乐观缓存 `optimistic`；现有缓存文件继续启用。
 
-`route.default_domain_resolver` 使用 `dns_resolver`（`223.5.5.5`），用于未单独指定解析器的代理节点域名解析；“直连”出站显式指定 `domain_resolver: "dns_direct"`，目标域名继续交给 AdGuard Home。客户端 DNS 查询仍按 `dns.rules` 分流。
+`route.default_domain_resolver` 使用 `dns_node`（`https://172.237.2.224:2443/dns-query/xxx`），用于未单独指定解析器的代理节点域名解析；该 DoH 直接连接。公开模板保留占位符，在 `sub-store-generate.js` 之后添加独立文件脚本 `sub-store-inject-dns-node.js`，仅在该操作的参数编辑器中填写 `dns_node_path`，详见 [私有 DoH 路径注入说明](SUB-STORE.md#单独注入私有-doh-路径)。生成的配置仍包含真实路径，输出链接和文件需保密。目前仅使用这一台上游，不包含三台 DoH 的自动切换。保留 `dns_resolver`（`223.5.5.5`）定义；“直连”出站显式指定 `domain_resolver: "dns_direct"`，目标域名继续交给 AdGuard Home。客户端 DNS 查询仍按 `dns.rules` 分流。
 
 远程规则集通过顶层 `http_clients` 中的“直连下载”客户端下载，由 `route.default_http_client` 统一指定，出口为“直连”。全部 20 个远程规则集、官方 Dashboard 和 Yacd-meta 的 GitHub 下载地址均添加 `https://gh-proxy.com/` 前缀，格式为 `https://gh-proxy.com/https://原始GitHub地址`。规则集不再使用已弃用的 `download_detour`；Yacd-meta 通过 `external_ui_download_detour: "直连"` 指定下载出口。
 

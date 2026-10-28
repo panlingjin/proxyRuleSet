@@ -1,6 +1,6 @@
 # 使用 Sub-Store 生成完整 sing-box 配置
 
-本方案针对 sing-box 1.14.3，流程为：`config.json` 模板 → `sub-store-generate.js` → 完整配置。一个文件脚本完成节点注入和校验，地区识别和分组筛选固定在脚本顶部的 `REGIONS`、`GROUP_RULES` 中。
+本方案针对 sing-box 1.14.3，流程为：`config.json` 模板 → `sub-store-generate.js` → `sub-store-inject-dns-node.js` → 完整配置。生成脚本完成节点注入和校验，独立注入脚本填写私有 DoH 路径；地区识别和分组筛选固定在生成脚本顶部的 `REGIONS`、`GROUP_RULES` 中。
 
 ## 文件用途
 
@@ -9,6 +9,7 @@
 | `config.json` | 唯一当前模板，维护 DNS、路由、规则集、入站、分组和面板 |
 | `sub-store-generate.js` | 读取订阅或组合订阅，按固定规则填充分组并校验输出 |
 | `sub-store-arguments.json` | 仅包含 `name` 和 `type` 的参数示例 |
+| `sub-store-inject-dns-node.js` | 从本脚本的参数读取私有路径，仅更新 `dns_node.path` |
 
 ## 1. 保存订阅
 
@@ -43,7 +44,7 @@ https://gh-proxy.com/https://raw.githubusercontent.com/panlingjin/proxyRuleSet/m
 https://gh-proxy.com/https://raw.githubusercontent.com/panlingjin/proxyRuleSet/main/clients/sing-box/sub-store-generate.js
 ```
 
-只支持以下两个参数：
+生成脚本只支持以下两个参数：
 
 | 参数 | 含义 | 默认值 |
 | --- | --- | --- |
@@ -60,6 +61,25 @@ https://gh-proxy.com/https://raw.githubusercontent.com/panlingjin/proxyRuleSet/m
 ```
 
 通常只需修改 `name`，名称首尾空白会自动清理，内部空格保留；组合订阅再设置 `type=collection`，不传 `type` 则默认使用 `subscription`。其他参数（包括旧的 `outbound`）会报错，请从参数编辑器中移除。`type` 不接受 `1`、`组合订阅` 等别名。
+
+### 单独注入私有 DoH 路径
+
+在同一个普通文件中再添加一个本地脚本操作，放在生成脚本之后，粘贴 `sub-store-inject-dns-node.js` 全部内容。执行顺序为：
+
+1. `sub-store-generate.js`：参数只填 `name`、`type`。
+2. `sub-store-inject-dns-node.js`：在这个操作自己的参数编辑器中填写：
+
+```json
+{
+  "dns_node_path": "/dns-query/你的私有key"
+}
+```
+
+填写完整路径，不包含 `https://`、服务器地址或端口。已有的百分号编码及查询参数按原值保留。不要把该参数填到生成脚本中，也不要把真实 key 写进仓库、模板、脚本源码或公开参数示例；模板继续保留 `/dns-query/xxx`。
+
+注入脚本只修改已有 `tag: "dns_node"`、`type: "https"` 的 DNS 服务器的 `path`。未填写参数、路径仍为 `/dns-query/xxx`、输入无效或 `dns_node` 缺失、重复、类型不符时，报错并保留本操作的原输入；脚本不记录参数或配置日志。
+
+私有参数保存在自己的 Sub-Store 中，生成的完整配置及预览仍包含真实路径，因此输出链接、配置文件和 Sub-Store 备份也需保密。这个脚本不加密生成配置，也不提供三台 DoH 的自动切换。
 
 ## 4. 固定分组规则与校验
 
@@ -87,11 +107,11 @@ https://gh-proxy.com/https://raw.githubusercontent.com/panlingjin/proxyRuleSet/m
 
 输出前检查模板和参数、节点/分组/endpoint 名称唯一性、成员引用、`default` 和 `detour` 引用是否存在，拒绝 `{all}` 与旧 `filter`。不在生成脚本中检查依赖循环，完整配置仍需交给 sing-box 检查。兜底只补空组，不修复不存在的引用或无效 `default`；订阅请求失败或转换后的节点数组为空时，仍报错停止生成。
 
-只有全部检查通过才写入 `$content`，失败时保留原输入并抛出包含相关分组或节点名称的错误。DNS、路由顺序、规则集、TUN、面板和测速参数沿用模板。脚本的引用检查不能替代 sing-box 对完整配置的检查。
+生成脚本只有全部检查通过才写入 `$content`，失败时保留原输入并抛出包含相关分组或节点名称的错误。DNS、路由顺序、规则集、TUN、面板和测速参数沿用模板，再由独立注入脚本设置 `dns_node.path`。脚本的引用检查不能替代 sing-box 对完整配置的检查。
 
 ## 5. 预览、下载和部署
 
-保存并预览文件输出，确认真实节点已注入、分组非空、原成员顺序保留，且没有 `{all}` 或 `filter`。若某个地区组只有“直连”，表示该组未匹配到符合条件的节点并回退直连；需要地区出口时，应调整订阅节点名称或脚本筛选规则。
+保存并预览文件输出，确认真实节点已注入、分组非空、原成员顺序保留，没有 `{all}` 或 `filter`，且 `dns_node.path` 已替换为真实路径。若某个地区组只有“直连”，表示该组未匹配到符合条件的节点并回退直连；需要地区出口时，应调整订阅节点名称或脚本筛选规则。
 
 复制该文件的输出/分享链接，而不是仅输出节点的订阅链接。普通文件接口形式是 `/api/file/sing-box-config`，完整 URL 和访问前缀以 Sub-Store 复制出的链接为准。
 
@@ -108,7 +128,7 @@ sing-box check -c /tmp/sing-box-generated.json
 
 将普通文件中的 xream 和后处理操作替换为一个 `sub-store-generate.js` 操作，仅保留 `name`、`type` 两个参数，删除 `outbound`。不要把新脚本叠加在 xream 后面，否则已注入节点会触发名称冲突。
 
-新流程只需一个生成脚本，不应再添加旧后处理操作。本仓库的参数示例仅用于新生成脚本。
+节点生成只保留一个 `sub-store-generate.js`，不要叠加旧节点后处理操作；在其后添加本说明中的 `sub-store-inject-dns-node.js`。本仓库的 `sub-store-arguments.json` 仅用于生成脚本，私有路径参数单独保存在注入操作中。
 
 修改 DNS、路由或面板时维护 `config.json`；修改筛选时维护生成脚本的 `REGIONS`、`GROUP_RULES` 并同步本文。重命名分组时同步修改模板中的引用及脚本中的对应名称。历史版本配置仍仅用于对应版本的恢复。
 
@@ -117,7 +137,7 @@ sing-box check -c /tmp/sing-box-generated.json
 在仓库根目录使用 Node.js 22 或更新版本执行：
 
 ```bash
-node --test clients/sing-box/sub-store-generate.test.cjs
+node --test clients/sing-box/sub-store-generate.test.cjs clients/sing-box/sub-store-inject-dns-node.test.cjs
 ```
 
 测试通过模拟 Sub-Store 文件脚本上下文检查生成行为，不联网获取真实订阅，也不运行 sing-box；实际 Sub-Store 预览和目标 Debian 内核检查仍需执行。

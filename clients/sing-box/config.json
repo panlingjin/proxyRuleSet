@@ -18,6 +18,13 @@
         "server": "223.5.5.5"
       },
       {
+        "tag": "dns_node",
+        "type": "https",
+        "server": "172.237.2.224",
+        "server_port": 2443,
+        "path": ""
+      },
+      {
         "tag": "dns_direct",
         "type": "udp",
         "server": "192.168.6.20"
@@ -27,6 +34,12 @@
       {
         "query_type": "HTTPS",
         "action": "reject"
+      },
+      {
+        "domain_suffix": [
+          "nodecon.uk"
+        ],
+        "server": "dns_node"
       },
       {
         "clash_mode": "direct",
@@ -306,7 +319,7 @@
     "auto_detect_interface": true,
     "default_http_client": "直连下载",
     "default_domain_resolver": {
-      "server": "dns_resolver"
+      "server": "dns_node"
     },
     "rules": [
       {
