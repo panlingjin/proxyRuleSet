@@ -18,13 +18,10 @@ pr:
 dns:
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
-    - "localhost"
     - "+.lan"
     - "+.local"
     - "+.arpa"
-    - "rule-set:private_domain"
     - "rule-set:direct_domain"
-    - "rule-set:apple_domain"
     - "rule-set:cn_domain"
 
   # DNS 分流：内网使用系统/专用 DNS，国内和直连域名使用国内 DNS。
