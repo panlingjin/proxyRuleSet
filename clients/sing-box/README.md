@@ -22,7 +22,7 @@ Yacd-meta 地址为 `http://Debian地址:9090/ui/`，后端地址为 `http://Deb
 
 ## DNS 与测速
 
-DNS 先拒绝 HTTPS 类型查询，再将 `n-02.nodecon.uk` 和 `n-26-l3.nodecon.uk` 的查询交给 `dns_node`，然后匹配模式规则；规则模式下依次匹配自定义直连、自定义代理（含 `source-transit`）、国内分类和国外分类，最终使用 `dns_proxy`。全局模式的数据流量使用 `GLOBAL` 分组。
+DNS 先拒绝 HTTPS 类型查询，再将 `nodecon.uk` 后缀域名查询交给 `dns_node`，然后匹配模式规则；规则模式下依次匹配自定义直连、自定义代理（含 `source-transit`）、国内分类和国外分类；未匹配上述已知分类的非国外未知域名，通过带国内 ECS 的 `dns_proxy` 执行预解析（`evaluate`），响应 IP 命中 `geoip-cn` 则交由 `dns_direct` 本地解析，其余最终使用 `dns_proxy`。全局模式的数据流量使用 `GLOBAL` 分组。
 
 启用 `dns.reverse_mapping`，根据经 sing-box 返回的 DNS 响应保存 IP 与域名映射，为后续路由补充域名信息；保留协议嗅探。DNS 劫持规则匹配目标端口 53 或嗅探识别出的 DNS 协议，两者满足任一条件即执行 `hijack-dns`。
 
