@@ -694,8 +694,7 @@
               "sntp.uk",
               "114514417.xyz",
               "ouonetwork.com",
-              "良心云.com",
-              "ouonet.org"
+              "良心云.com"
             ],
             "ip_cidr": [
               "5.28.195.2"
@@ -709,7 +708,8 @@
         "rules": [
           {
             "domain_suffix": [
-              "cn2gias.uk"
+              "cn2gias.uk",
+              "ouonet.org"
             ]
           }
         ]
