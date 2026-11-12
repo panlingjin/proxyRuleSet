@@ -14,6 +14,9 @@ DOMAIN-SUFFIX,iconify.design
 DOMAIN-SUFFIX,array2026.com
 DOMAIN-SUFFIX,localsend.org
 
+# 域名关键词匹配
+DOMAIN-KEYWORD,gh-proxy
+
 # PT站点
 DOMAIN-SUFFIX,ptvicomo.net
 DOMAIN-SUFFIX,hdpt.xyz
